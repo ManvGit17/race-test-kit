@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 import random
 from collections.abc import Callable
 from typing import Any
@@ -17,7 +18,7 @@ def run(
     rounds: int = 1,
     prepare: Callable[[int], Any] | None = None,
     reset: Callable[[], object] | None = None,
-    check: Callable[[], object] | None = None,
+    check: Callable[..., object] | None = None,
     seed: int | None = None,
     round_timeout: float = 30.0,
 ) -> RunResult:
@@ -31,7 +32,8 @@ def run(
     - ``check()`` runs after every round. Returning ``False`` or raising ``AssertionError``
       marks the round as violated; any other return value (``None`` included, so a function
       that only asserts works) passes. Any other exception stops the run: a broken check is a
-      bug, not a finding.
+      bug, not a finding. A check that takes one argument, ``check(round)``, is given the
+      round's ``RoundResult``, so it can look at the responses too.
     - ``seed`` fixes ``racekit.rng()`` for every call; a random one is chosen and recorded if
       not given.
     """
@@ -49,21 +51,31 @@ def run(
         for number in range(1, rounds + 1):
             if reset is not None:
                 reset()
-            calls = pool.run_round(number)
-            violated, message = _check(check)
-            result.rounds.append(RoundResult(number, calls, violated, message))
+            this = RoundResult(number, pool.run_round(number))
+            this.violated, this.check_message = _check(check, this)
+            result.rounds.append(this)
     finally:
         pool.close()
     return result
 
 
-def _check(check: Callable[[], object] | None) -> tuple[bool, str | None]:
+def _check(check: Callable[..., object] | None, this: RoundResult) -> tuple[bool, str | None]:
     if check is None:
         return False, None
     try:
-        outcome = check()
+        outcome = check(this) if _wants_round(check) else check()
     except AssertionError as exc:
         return True, str(exc) or "AssertionError"
     if outcome is False:
         return True, "check returned False"
     return False, None
+
+
+def _wants_round(check: Callable[..., object]) -> bool:
+    """Whether ``check`` has a required positional parameter, so it takes the round."""
+    try:
+        parameters = inspect.signature(check).parameters.values()
+    except (TypeError, ValueError):  # some builtins have no signature: call them bare
+        return False
+    positional = (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+    return any(p.kind in positional and p.default is p.empty for p in parameters)
