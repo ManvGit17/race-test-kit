@@ -1,0 +1,67 @@
+{
+  "when": "2026-11-23T09:52:44+00:00",
+  "command": "uv run python bench/phase2_strategies.py --runs 5 --rounds 20 --clients 50 --seats 10",
+  "machine": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.13.5",
+    "logical_cpus": 22
+  },
+  "results": {
+    "naive": {
+      "rounds": 100,
+      "rounds_oversold": 90,
+      "rounds_sold_out": 10,
+      "rounds_undersold": 0,
+      "most_sold": 27,
+      "statuses": {
+        "201": 1562,
+        "409": 3438
+      },
+      "call_errors": 0,
+      "spread_ms_median": 18.998,
+      "spread_ms_max": 86.695
+    },
+    "row_lock": {
+      "rounds": 100,
+      "rounds_oversold": 0,
+      "rounds_sold_out": 100,
+      "rounds_undersold": 0,
+      "most_sold": 10,
+      "statuses": {
+        "201": 1000,
+        "409": 4000
+      },
+      "call_errors": 0,
+      "spread_ms_median": 19.378,
+      "spread_ms_max": 178.202
+    },
+    "atomic_update": {
+      "rounds": 100,
+      "rounds_oversold": 0,
+      "rounds_sold_out": 100,
+      "rounds_undersold": 0,
+      "most_sold": 10,
+      "statuses": {
+        "201": 1000,
+        "409": 4000
+      },
+      "call_errors": 0,
+      "spread_ms_median": 19.573,
+      "spread_ms_max": 176.805
+    },
+    "skip_locked": {
+      "rounds": 100,
+      "rounds_oversold": 0,
+      "rounds_sold_out": 100,
+      "rounds_undersold": 0,
+      "most_sold": 10,
+      "statuses": {
+        "201": 1000,
+        "409": 4000
+      },
+      "call_errors": 0,
+      "spread_ms_median": 18.39,
+      "spread_ms_max": 181.571
+    }
+  }
+}
