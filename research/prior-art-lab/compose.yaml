@@ -1,0 +1,20 @@
+# One small PostgreSQL for the prior-art lab. Kept light on purpose: the machine is shared
+# with another project, so memory is capped and shared_buffers is small.
+name: racekit-prior-art-lab
+
+services:
+  db:
+    image: postgres:18.7
+    environment:
+      POSTGRES_USER: lab
+      POSTGRES_PASSWORD: lab
+      POSTGRES_DB: lab
+    command: ["postgres", "-c", "shared_buffers=32MB", "-c", "max_connections=60"]
+    ports: ["127.0.0.1:5433:5432"]
+    mem_limit: 256m
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lab -d lab"]
+      interval: 2s
+      retries: 30
