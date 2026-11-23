@@ -1,0 +1,20 @@
+# Local-only instructions for Claude Code and the owner; not part of the repo
+CLAUDE.md
+PLAN.md
+.claude/
+docs/commit-plan.md
+
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+.schemathesis/
+dist/
+build/
+site/
+
+# Scratch file the prior-art lab writes during a round
+research/prior-art-lab/results/**/*.round.json
