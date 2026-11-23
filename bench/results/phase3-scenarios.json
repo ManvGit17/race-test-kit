@@ -1,0 +1,99 @@
+{
+  "when": "2026-11-23T17:51:26+00:00",
+  "command": "uv run python bench/phase3_scenarios.py --rounds 100",
+  "machine": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.13.5",
+    "logical_cpus": 22
+  },
+  "results": {
+    "duplicate/broken": {
+      "version": "check_then_insert",
+      "size": {
+        "copies": 5
+      },
+      "rounds": 100,
+      "rounds_violated": 100,
+      "statuses": {
+        "200": 1,
+        "201": 499
+      },
+      "call_errors": 0,
+      "spread_ms_median": 1.107,
+      "first_violation": "4 charges for one Idempotency-Key"
+    },
+    "lost_update/broken": {
+      "version": "read_modify_write",
+      "size": {
+        "clients": 20
+      },
+      "rounds": 100,
+      "rounds_violated": 100,
+      "statuses": {
+        "200": 2000
+      },
+      "call_errors": 0,
+      "spread_ms_median": 5.922,
+      "first_violation": "20 updates acknowledged: expected 200, found 50 (15 updates lost)"
+    },
+    "interleave/broken": {
+      "version": "check_then_act",
+      "size": {
+        "orders": 5
+      },
+      "rounds": 100,
+      "rounds_violated": 100,
+      "statuses": {
+        "200": 965,
+        "409": 35
+      },
+      "call_errors": 0,
+      "spread_ms_median": 2.695,
+      "first_violation": "order 3 cancelled with 1 charges; order 5 cancelled with 1 charges; order 1: pay and cancel both succeeded"
+    },
+    "duplicate/fixed": {
+      "version": "unique_key",
+      "size": {
+        "copies": 5
+      },
+      "rounds": 100,
+      "rounds_violated": 0,
+      "statuses": {
+        "200": 400,
+        "201": 100
+      },
+      "call_errors": 0,
+      "spread_ms_median": 1.189,
+      "first_violation": null
+    },
+    "lost_update/fixed": {
+      "version": "atomic",
+      "size": {
+        "clients": 20
+      },
+      "rounds": 100,
+      "rounds_violated": 0,
+      "statuses": {
+        "200": 2000
+      },
+      "call_errors": 0,
+      "spread_ms_median": 6.439,
+      "first_violation": null
+    },
+    "interleave/fixed": {
+      "version": "guarded_update",
+      "size": {
+        "orders": 5
+      },
+      "rounds": 100,
+      "rounds_violated": 0,
+      "statuses": {
+        "200": 500,
+        "409": 500
+      },
+      "call_errors": 0,
+      "spread_ms_median": 2.835,
+      "first_violation": null
+    }
+  }
+}

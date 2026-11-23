@@ -133,3 +133,42 @@
 4. Why do the tests reset and check through the database instead of the app's own endpoints?
 5. The UNIQUE constraint stops a student holding two seats even under `naive`. What race does
    `naive` still have, and why doesn't the constraint stop it?
+
+## Phase 3: scenarios and the failure report (2026-11-23)
+
+**What was built**
+
+- `racekit.duplicate`, `racekit.lost_update` and `racekit.interleave`, each a thin layer over
+  `racekit.run` (`src/racekit/scenarios/`).
+- A `check` with one parameter now receives the round, so it can look at responses;
+  `racekit.at_most` and `racekit.same_response` are two ready-made ones.
+- `RunResult.report()`: the long failure message.
+- Three new shop features, each in a broken and a fixed version, with tests for both and a
+  bench: payments with an `Idempotency-Key`, wallet top-ups, and paying or cancelling an order.
+
+**Why**
+
+- Building on `run` means the gate, timeouts, seed and report behave the same in every scenario.
+- `lost_update` counts only acknowledged updates: a service that says "conflict, try again" and
+  applies nothing is correct, and must not be accused.
+- `interleave` gives each step a copy number, so pay copy 3 and cancel copy 3 both work on
+  order 4, and five orders race in one round.
+- Every fix moves the decision into one statement PostgreSQL serialises: claiming a primary key,
+  `balance = balance + amount`, `UPDATE ... WHERE status = 'pending'`. At READ COMMITTED, an
+  `UPDATE` that had to wait for another transaction re-checks its `WHERE` on the newly committed
+  row; a plain `SELECT` before it does not.
+- Results (`bench/results/phase3-scenarios.json`): each broken version violated in 100 of 100
+  rounds (the duplicate payment made 499 charges for 100 keys); each fixed one in 0 of 100.
+
+**Quiz**
+
+1. In the fixed payment, five copies arrive together. What does each of the four losers'
+   `INSERT ... ON CONFLICT DO NOTHING` wait for, and how does it find the charge id to return?
+2. Why does `lost_update` count only acknowledged updates instead of expecting
+   `clients × delta`?
+3. With `interleave({"pay": ..., "cancel": ...}, copies=5)`, which order does client 7 work on,
+   and which step does it run?
+4. Name two invariants of the pay/cancel race that the database alone cannot show, and how the
+   check sees them.
+5. Why does `UPDATE ... SET balance = balance + 10` never lose an update at READ COMMITTED,
+   while `SELECT balance` followed by `UPDATE ... SET balance = <value read + 10>` does?
