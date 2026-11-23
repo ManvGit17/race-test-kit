@@ -35,12 +35,14 @@ Changelog = "https://github.com/ManvGit17/race-test-kit/blob/main/CHANGELOG.md"
 
 [dependency-groups]
 dev = [
+    "fastapi==0.165.0",
     "httpx==0.28.1",
     "mypy==2.4.1",
     "psycopg-pool==3.3.3",
     "psycopg[binary]==3.3.9",
     "pytest==9.2.0",
     "ruff==0.17.6",
+    "uvicorn==0.54.0",
 ]
 
 [build-system]
@@ -62,8 +64,8 @@ select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
 
 [tool.mypy]
 strict = true
-files = ["src", "tests", "bench"]
+files = ["src", "tests", "bench", "examples"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "examples/shop/tests"]
 addopts = ["-ra", "--strict-markers"]
