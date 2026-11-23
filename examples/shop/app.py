@@ -1,30 +1,54 @@
-"""The demo shop: one reserve endpoint, four inventory strategies.
+"""The demo shop: each feature comes in a broken version and a fixed one.
 
     SHOP_DSN=postgresql://test:test@127.0.0.1:15418/test SHOP_STRATEGY=naive \\
         uv run uvicorn app:app --app-dir examples/shop --port 8000
 
-``SHOP_STRATEGY`` picks how seats are claimed (see ``strategies.py``); ``naive`` oversells on
-purpose. The tables are created on startup if they are missing.
+One environment variable per feature picks the version; the first in each list is broken on
+purpose and is the default.
+
+- ``SHOP_STRATEGY``, ``POST /events/{id}/reserve``:
+  naive, row_lock, atomic_update, skip_locked
+- ``SHOP_PAYMENTS``, ``POST /payments`` with an ``Idempotency-Key`` header:
+  check_then_insert, unique_key
+- ``SHOP_WALLET``, ``POST /wallets/{id}/topup``: read_modify_write, atomic
+- ``SHOP_ORDERS``, ``POST /orders/{id}/pay`` and ``/cancel``: check_then_act, guarded_update
+
+The tables are created on startup if they are missing.
 """
 
 from __future__ import annotations
 
 import os
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Sequence
 from contextlib import asynccontextmanager
 from typing import Any
 
+import orders
+import payments
 import shopdb
-from fastapi import FastAPI
+import wallet
+from fastapi import FastAPI, Header
 from fastapi.responses import JSONResponse
 from psycopg_pool import ConnectionPool
 from pydantic import BaseModel
 from strategies import STRATEGIES, Outcome, reserve
 
 DSN = os.environ.get("SHOP_DSN", "postgresql://test:test@127.0.0.1:15418/test")
-STRATEGY = os.environ.get("SHOP_STRATEGY", "naive")
-if STRATEGY not in STRATEGIES:
-    raise SystemExit(f"SHOP_STRATEGY must be one of {', '.join(STRATEGIES)}, not {STRATEGY!r}")
+
+
+def _setting(name: str, choices: Sequence[str]) -> str:
+    value = os.environ.get(name, choices[0])
+    if value not in choices:
+        raise SystemExit(f"{name} must be one of {', '.join(choices)}, not {value!r}")
+    return value
+
+
+MODES = {
+    "strategy": _setting("SHOP_STRATEGY", STRATEGIES),
+    "payments": _setting("SHOP_PAYMENTS", payments.MODES),
+    "wallet": _setting("SHOP_WALLET", wallet.MODES),
+    "orders": _setting("SHOP_ORDERS", orders.MODES),
+}
 
 STATUS = {
     Outcome.HELD: 201,
@@ -49,19 +73,22 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 app = FastAPI(title="racekit demo shop", lifespan=lifespan)
 
 
-class ReserveBody(BaseModel):
-    student: int
-
-
 @app.get("/health")
 def health() -> dict[str, str]:
-    return {"strategy": STRATEGY}
+    return MODES
+
+
+# -- seats ----------------------------------------------------------------------------------
+
+
+class ReserveBody(BaseModel):
+    student: int
 
 
 @app.post("/events/{event_id}/reserve")
 def reserve_seat(event_id: int, body: ReserveBody) -> JSONResponse:
     with pool.connection() as conn:
-        outcome = reserve(conn, STRATEGY, event_id, body.student)
+        outcome = reserve(conn, MODES["strategy"], event_id, body.student)
     return JSONResponse({"result": outcome.value}, status_code=STATUS[outcome])
 
 
@@ -72,3 +99,63 @@ def event(event_id: int) -> JSONResponse:
     if state is None:
         return JSONResponse({"error": "no such event"}, status_code=404)
     return JSONResponse({"capacity": state.capacity, "taken": state.sold})
+
+
+# -- payments -------------------------------------------------------------------------------
+
+
+class PaymentBody(BaseModel):
+    order: int
+    amount: int
+
+
+@app.post("/payments")
+def take_payment(
+    body: PaymentBody, idempotency_key: str | None = Header(default=None)
+) -> JSONResponse:
+    if not idempotency_key:
+        return JSONResponse({"error": "Idempotency-Key header required"}, status_code=400)
+    with pool.connection() as conn:
+        charge, created = payments.pay(
+            conn, MODES["payments"], idempotency_key, body.order, body.amount
+        )
+    return JSONResponse({"charge": charge}, status_code=201 if created else 200)
+
+
+# -- wallet ---------------------------------------------------------------------------------
+
+
+class TopupBody(BaseModel):
+    amount: int
+
+
+@app.post("/wallets/{wallet_id}/topup")
+def topup(wallet_id: int, body: TopupBody) -> JSONResponse:
+    with pool.connection() as conn:
+        balance = wallet.topup(conn, MODES["wallet"], wallet_id, body.amount)
+    if balance is None:
+        return JSONResponse({"error": "no such wallet"}, status_code=404)
+    return JSONResponse({"balance": balance})
+
+
+# -- orders ---------------------------------------------------------------------------------
+
+
+def _order_reply(done: bool | None, status: str) -> JSONResponse:
+    if done is None:
+        return JSONResponse({"error": "no such order"}, status_code=404)
+    if not done:
+        return JSONResponse({"error": "order is not pending"}, status_code=409)
+    return JSONResponse({"status": status})
+
+
+@app.post("/orders/{order_id}/pay")
+def pay_order(order_id: int) -> JSONResponse:
+    with pool.connection() as conn:
+        return _order_reply(orders.pay(conn, MODES["orders"], order_id), "paid")
+
+
+@app.post("/orders/{order_id}/cancel")
+def cancel_order(order_id: int) -> JSONResponse:
+    with pool.connection() as conn:
+        return _order_reply(orders.cancel(conn, MODES["orders"], order_id), "cancelled")

@@ -57,3 +57,63 @@ def state(conn: psycopg.Connection[Any], event_id: int) -> EventState | None:
     if row is None:
         return None
     return EventState(*row)
+
+
+# -- payments, wallets and orders -----------------------------------------------------------
+
+
+def reset_payments(conn: psycopg.Connection[Any]) -> None:
+    """Forget every charge and idempotency key."""
+    with conn.transaction():
+        conn.execute("DELETE FROM shop_idempotency_keys")
+        conn.execute("DELETE FROM shop_charges")
+
+
+def charges_for_key(conn: psycopg.Connection[Any], key: str) -> int:
+    row = conn.execute(
+        "SELECT count(*) FROM shop_charges WHERE idempotency_key = %s", (key,)
+    ).fetchone()
+    assert row is not None
+    return int(row[0])
+
+
+def reset_wallet(conn: psycopg.Connection[Any], wallet_id: int, balance: int) -> None:
+    conn.execute(
+        "INSERT INTO shop_wallets (id, balance) VALUES (%s, %s)"
+        " ON CONFLICT (id) DO UPDATE SET balance = EXCLUDED.balance",
+        (wallet_id, balance),
+    )
+
+
+def balance(conn: psycopg.Connection[Any], wallet_id: int) -> int:
+    row = conn.execute("SELECT balance FROM shop_wallets WHERE id = %s", (wallet_id,)).fetchone()
+    assert row is not None
+    return int(row[0])
+
+
+def reset_orders(conn: psycopg.Connection[Any], count: int, amount: int = 100) -> None:
+    """Orders 1..count, all pending, with no charges."""
+    with conn.transaction():
+        conn.execute("DELETE FROM shop_charges WHERE idempotency_key IS NULL")
+        conn.execute("DELETE FROM shop_orders")
+        conn.execute(
+            "INSERT INTO shop_orders (id, status, amount)"
+            " SELECT n, 'pending', %s FROM generate_series(1, %s) n",
+            (amount, count),
+        )
+
+
+@dataclass(frozen=True)
+class OrderState:
+    id: int
+    status: str
+    charges: int
+
+
+def order_states(conn: psycopg.Connection[Any]) -> list[OrderState]:
+    rows = conn.execute(
+        "SELECT o.id, o.status, (SELECT count(*) FROM shop_charges c"
+        "   WHERE c.order_id = o.id AND c.idempotency_key IS NULL)"
+        " FROM shop_orders o ORDER BY o.id"
+    ).fetchall()
+    return [OrderState(int(r[0]), str(r[1]), int(r[2])) for r in rows]

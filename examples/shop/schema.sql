@@ -23,3 +23,32 @@ CREATE TABLE IF NOT EXISTS shop_seats (
 );
 
 CREATE INDEX IF NOT EXISTS shop_seats_free ON shop_seats (event_id) WHERE reservation_id IS NULL;
+
+-- Orders that can be paid or cancelled, once (the interleave scenario).
+CREATE TABLE IF NOT EXISTS shop_orders (
+    id     int PRIMARY KEY,
+    status text NOT NULL CHECK (status IN ('pending', 'paid', 'cancelled')),
+    amount int NOT NULL
+);
+
+-- Money taken. No foreign key and no unique key on purpose: the broken versions must be able
+-- to write the duplicates the tests look for.
+CREATE TABLE IF NOT EXISTS shop_charges (
+    id              bigserial PRIMARY KEY,
+    order_id        int NOT NULL,
+    amount          int NOT NULL,
+    idempotency_key text
+);
+
+-- The fix for duplicate payments: the key is claimed by inserting it, which only one
+-- transaction can do.
+CREATE TABLE IF NOT EXISTS shop_idempotency_keys (
+    key       text PRIMARY KEY,
+    charge_id bigint
+);
+
+-- A balance topped up by many requests at once (the lost_update scenario).
+CREATE TABLE IF NOT EXISTS shop_wallets (
+    id      int PRIMARY KEY,
+    balance int NOT NULL
+);
