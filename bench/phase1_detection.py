@@ -1,7 +1,7 @@
 """Run the Phase 1 reference tests many times and count how often the lost update is caught.
 
     docker compose up -d --wait
-    TEST_PG_DSN=postgresql://test:test@127.0.0.1:54318/test uv run python bench/phase1_detection.py
+    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/phase1_detection.py
 
 Each run is a fresh pytest process running one test from ``tests/test_counter.py``:
 

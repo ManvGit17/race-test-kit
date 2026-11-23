@@ -1,8 +1,11 @@
 # Test database. `docker compose up -d --wait`, then
-# TEST_PG_DSN=postgresql://test:test@127.0.0.1:54318/test
+# TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test
 #
 # Only PostgreSQL 18 starts by default, to keep the machine light. The other versions CI tests
 # start with `docker compose --profile matrix up -d --wait`.
+#
+# Ports 15416-15418 sit below Windows' dynamic port range (49152-65535), where Hyper-V and WSL
+# reserve blocks at boot: 54318 was taken that way on 2026-11-23.
 x-pg: &pg
   environment:
     POSTGRES_USER: test
@@ -21,14 +24,14 @@ services:
   pg18:
     <<: *pg
     image: postgres:18.7
-    ports: ["127.0.0.1:54318:5432"]
+    ports: ["127.0.0.1:15418:5432"]
   pg17:
     <<: *pg
     image: postgres:17.12
-    ports: ["127.0.0.1:54317:5432"]
+    ports: ["127.0.0.1:15417:5432"]
     profiles: [matrix]
   pg16:
     <<: *pg
     image: postgres:16.16
-    ports: ["127.0.0.1:54316:5432"]
+    ports: ["127.0.0.1:15416:5432"]
     profiles: [matrix]
