@@ -95,3 +95,41 @@
 4. Two runs use the same seed. Which parts of a failing round repeat, and which do not?
 5. The gate releases 50 do-nothing threads within about 1 ms, yet the lab measured 16 to
    33 ms with HTTP calls. Where does the difference come from?
+
+## Phase 2: demo shop and the four strategies (2026-11-23)
+
+**What was built**
+
+- `examples/shop/`: a FastAPI app with one endpoint, `POST /events/{id}/reserve`, and four
+  strategies ported from festrush (`strategies.py`), chosen by `SHOP_STRATEGY`. Three tables:
+  events (with a `claimed` counter), reservations (one per student per event) and seats.
+- `shopdb.py` resets an event and reads its state straight from PostgreSQL; `harness.py` runs
+  the app with uvicorn in a subprocess and races 50 students at 10 seats with `racekit.run`.
+- Tests: `naive` must oversell; `row_lock`, `atomic_update` and `skip_locked` must not, and must
+  not answer 5xx; the first two must sell every seat. Plus one-request-at-a-time behaviour.
+- `bench/phase2_strategies.py` and ADR 0004. Local databases moved to ports 15416-15418.
+
+**Why**
+
+- `naive` counts, then inserts: between the two, other requests count the same number. The
+  three fixes stop that in different places: `row_lock` makes claims queue on one row lock;
+  `atomic_update` lets one `UPDATE ... WHERE claimed < capacity` decide; `skip_locked` gives
+  each buyer a different seat row instead of making them wait for the same one.
+- The checks read the database, not the app: the thing under test cannot be its own judge.
+- `skip_locked` can answer "busy" when free seats are only locked by claims still in flight,
+  so it is not required to sell out; it did sell out in all 100 measured rounds here.
+- Results (`bench/results/phase2-strategies.json`): `naive` oversold in 90 of 100 rounds, up to
+  27 reservations for 10 seats; the three safe strategies oversold in 0 of 100.
+- Ports: Windows reserves blocks of ports in its dynamic range (49152 and up) for Hyper-V and
+  WSL at boot. 54318 fell inside one after a restart, so the databases moved below that range.
+
+**Quiz**
+
+1. Walk through two `naive` requests that both take the last seat. Which statement does each
+   run, and in what order?
+2. In `atomic_update`, why is the reservation inserted *before* the counter is updated, and what
+   undoes it when the event is full?
+3. What does `SKIP LOCKED` change compared with `FOR UPDATE`, and why can it lead to "busy"?
+4. Why do the tests reset and check through the database instead of the app's own endpoints?
+5. The UNIQUE constraint stops a student holding two seats even under `naive`. What race does
+   `naive` still have, and why doesn't the constraint stop it?
