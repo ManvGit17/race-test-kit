@@ -1,0 +1,943 @@
+{
+  "probe": "pytest-together",
+  "command": [
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "probe_pytest_together.py"
+  ],
+  "strategy": "naive",
+  "clients": 2,
+  "seats": 1,
+  "rounds": 40,
+  "versions": {
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "pytest-together": "0.1.0",
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "rows": [
+    {
+      "round": 1,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.12200000128359534,
+      "seconds": 1.41,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.2688000022317283,
+      "together_spread_ms": 0.3055000015592668,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000002079B665800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24776.0568362, marked=False), Outcome(index=1, value=201, error=None, started=24776.0565307, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 2,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.2632000032463111,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5267000015010126,
+      "together_spread_ms": 0.5508000031113625,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000015173BC9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24777.5472101, marked=False), Outcome(index=1, value=201, error=None, started=24777.5466593, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 3,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.2620999985083472,
+      "seconds": 1.55,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.41540000165696256,
+      "together_spread_ms": 0.44689999776892364,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000298EC501800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24779.1121473, marked=False), Outcome(index=1, value=201, error=None, started=24779.1117004, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 4,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.12710000009974465,
+      "seconds": 1.4,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.32160000046133064,
+      "together_spread_ms": 0.3393000006326474,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000025E57401800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24780.5645444, marked=False), Outcome(index=1, value=201, error=None, started=24780.5642051, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 5,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.0878000028023962,
+      "seconds": 1.47,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.44549999802256934,
+      "together_spread_ms": 0.48659999811206944,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000013BA38F9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24782.0672264, marked=False), Outcome(index=1, value=201, error=None, started=24782.0667398, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 6,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.11200000153621659,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.2916000012191944,
+      "together_spread_ms": 0.3307999977550935,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000001B72D7A1800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24783.5881948, marked=False), Outcome(index=1, value=201, error=None, started=24783.587864, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 7,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.07869999899412505,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.28359999851090834,
+      "together_spread_ms": 0.3194999990228098,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000022483641800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24785.09178, marked=False), Outcome(index=1, value=201, error=None, started=24785.0914605, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 8,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.17250000018975697,
+      "seconds": 1.51,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5548000008275267,
+      "together_spread_ms": 0.5337000002327841,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000017573305800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24786.6447631, marked=False), Outcome(index=1, value=201, error=None, started=24786.6442294, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 9,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.18769999951473437,
+      "seconds": 1.51,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.6834999985585455,
+      "together_spread_ms": 0.6881000008434057,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000021C9ED31800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24788.223569, marked=False), Outcome(index=1, value=201, error=None, started=24788.2228809, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 10,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.0870000003487803,
+      "seconds": 1.49,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.2806000011332799,
+      "together_spread_ms": 0.3634000022429973,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000029605DB9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24789.8046327, marked=False), Outcome(index=1, value=201, error=None, started=24789.8042693, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 11,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.07490000280085951,
+      "seconds": 1.47,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.4239999980200082,
+      "together_spread_ms": 0.44160000106785446,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000001F2607D9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24791.3402969, marked=False), Outcome(index=1, value=201, error=None, started=24791.3398553, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 12,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.21290000222506933,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.3036999987671152,
+      "together_spread_ms": 0.323799999023322,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000230D7F69800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24792.8122157, marked=False), Outcome(index=1, value=201, error=None, started=24792.8118919, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 13,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.17689999731373973,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.3341000010550488,
+      "together_spread_ms": 0.3544999999576248,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000020A18309800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24794.315542, marked=False), Outcome(index=1, value=201, error=None, started=24794.3151875, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 14,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.13069999840809032,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.4915000026812777,
+      "together_spread_ms": 0.41229999987990595,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000014D62701800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24795.8008839, marked=False), Outcome(index=1, value=201, error=None, started=24795.8004716, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 15,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.09449999924981967,
+      "seconds": 1.47,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.43170000208192505,
+      "together_spread_ms": 0.44189999971422367,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000023EA7ABD800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24797.3495044, marked=False), Outcome(index=1, value=201, error=None, started=24797.3490625, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 16,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.6083999978727661,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5167000017536338,
+      "together_spread_ms": 0.5367000012483913,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000176279F9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24798.8636966, marked=False), Outcome(index=1, value=201, error=None, started=24798.8631599, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 17,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.1598999988345895,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.35230000139563344,
+      "together_spread_ms": 0.32270000156131573,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000021B0DED9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24800.3405905, marked=False), Outcome(index=1, value=201, error=None, started=24800.3402678, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 18,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.09280000085709617,
+      "seconds": 1.41,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.2758999980869703,
+      "together_spread_ms": 0.30890000198269263,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000002140EEC1800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24801.7989266, marked=False), Outcome(index=1, value=201, error=None, started=24801.7986177, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 19,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.08920000254875049,
+      "seconds": 1.38,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.32329999885405414,
+      "together_spread_ms": 0.34779999987222254,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000232024E5800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24803.2033634, marked=False), Outcome(index=1, value=201, error=None, started=24803.2030156, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 20,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.09190000128000975,
+      "seconds": 1.48,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5716999985452276,
+      "together_spread_ms": 0.5318000003171619,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000242B6C89800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24804.7095157, marked=False), Outcome(index=1, value=201, error=None, started=24804.7089839, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 21,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.10239999755867757,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.36499999987427145,
+      "together_spread_ms": 0.4062999978486914,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000218106E5800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24806.1961337, marked=False), Outcome(index=1, value=201, error=None, started=24806.1957274, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 22,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.15999999959603883,
+      "seconds": 1.49,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5753999976150226,
+      "together_spread_ms": 0.605199998972239,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000029912329800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24807.7296946, marked=False), Outcome(index=1, value=201, error=None, started=24807.7290894, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 23,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.10900000052060932,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.6107000008341856,
+      "together_spread_ms": 0.583999997616047,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000252BDD99800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24809.261397, marked=False), Outcome(index=1, value=201, error=None, started=24809.260813, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 24,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.12629999764612876,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.7354000008490402,
+      "together_spread_ms": 0.816399999166606,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000019A12C39800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24810.7371675, marked=False), Outcome(index=1, value=201, error=None, started=24810.7363511, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 25,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.07669999831705354,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.2640999991854187,
+      "together_spread_ms": 0.29659999927389435,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000112D3DB1800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24812.2080173, marked=False), Outcome(index=1, value=201, error=None, started=24812.2077207, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 26,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.6033999998180661,
+      "seconds": 1.49,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.7699999987380579,
+      "together_spread_ms": 0.8256000000983477,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000001A2DB4A1800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24813.773113, marked=False), Outcome(index=1, value=201, error=None, started=24813.7722874, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 27,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 1.1711000006471295,
+      "seconds": 1.42,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.274800000624964,
+      "together_spread_ms": 0.311100000544684,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000017A5A9F9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24815.2413284, marked=False), Outcome(index=1, value=201, error=None, started=24815.2410173, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 28,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.09779999891179614,
+      "seconds": 1.52,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.3742000008060131,
+      "together_spread_ms": 0.3825999992841389,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000001F286399800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24816.8014755, marked=False), Outcome(index=1, value=201, error=None, started=24816.8010929, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 29,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.09110000246437266,
+      "seconds": 1.48,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.4466999998840038,
+      "together_spread_ms": 0.4502000010688789,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000002D2E21B5800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24818.3783357, marked=False), Outcome(index=1, value=201, error=None, started=24818.3778855, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 30,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 1.2353000020084437,
+      "seconds": 1.51,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5257999982859474,
+      "together_spread_ms": 0.5488999995577615,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000018DF4B91800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24819.9150458, marked=False), Outcome(index=1, value=201, error=None, started=24819.9144969, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 31,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.07589999950141646,
+      "seconds": 1.5,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.33569999868632294,
+      "together_spread_ms": 0.3741999971680343,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000022322F59800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24821.4524884, marked=False), Outcome(index=1, value=201, error=None, started=24821.4521142, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 32,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.07809999806340784,
+      "seconds": 1.47,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.37290000182110816,
+      "together_spread_ms": 0.3988999997091014,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000001DDDA101800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24822.9563834, marked=False), Outcome(index=1, value=201, error=None, started=24822.9559845, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 33,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.29830000130459666,
+      "seconds": 1.59,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.46550000115530565,
+      "together_spread_ms": 0.5840999983774964,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000027FEAA81800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24824.6120801, marked=False), Outcome(index=1, value=201, error=None, started=24824.611496, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 34,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.09919999865815043,
+      "seconds": 1.57,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5603999998129439,
+      "together_spread_ms": 0.5982000002404675,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000021633CB9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24826.2622401, marked=False), Outcome(index=1, value=201, error=None, started=24826.2616419, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 35,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.1709000025584828,
+      "seconds": 1.56,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.4153000008955132,
+      "together_spread_ms": 0.5703000024368521,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000021D95DD9800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24827.8957068, marked=False), Outcome(index=1, value=201, error=None, started=24827.8951365, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 36,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.10539999857428484,
+      "seconds": 1.55,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.3132999991066754,
+      "together_spread_ms": 0.34390000291750766,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000001D678545800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24829.4884085, marked=False), Outcome(index=1, value=201, error=None, started=24829.4880646, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 37,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.15500000154133886,
+      "seconds": 1.67,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.39169999945443124,
+      "together_spread_ms": 0.405399998271605,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x00000200C9359800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24831.2377475, marked=False), Outcome(index=1, value=201, error=None, started=24831.2373421, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 38,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.15390000044135377,
+      "seconds": 1.55,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5156000006536487,
+      "together_spread_ms": 0.5597000017587561,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000024C947B1800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24832.8688908, marked=False), Outcome(index=1, value=201, error=None, started=24832.8683311, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 39,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.10490000204299577,
+      "seconds": 1.56,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.903299998753937,
+      "together_spread_ms": 0.9717000029922929,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x0000022E50B71800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24834.4942364, marked=False), Outcome(index=1, value=201, error=None, started=24834.4932647, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 40,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.23179999698186293,
+      "seconds": 1.51,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.3101999973296188,
+      "together_spread_ms": 0.2992000008816831,
+      "together_overlapped": true,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = count(<function test_no_oversell.<locals>.<lambda> at 0x000001ED3DB19800>)",
+        "E        +    where count = Result(outcomes=[Outcome(index=0, value=201, error=None, started=24836.0812903, marked=False), Outcome(index=1, value=201, error=None, started=24836.0809911, marked=False)], tolerance_ms=5.0).count"
+      ],
+      "red_reason": "invariant"
+    }
+  ]
+}

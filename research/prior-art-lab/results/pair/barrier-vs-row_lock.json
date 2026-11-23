@@ -1,0 +1,662 @@
+{
+  "probe": "barrier-vs-row_lock",
+  "command": [
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "probe_barrier.py"
+  ],
+  "strategy": "row_lock",
+  "clients": 2,
+  "seats": 1,
+  "rounds": 40,
+  "versions": {
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "rows": [
+    {
+      "round": 1,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.30469999910565093,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.410699998610653
+    },
+    {
+      "round": 2,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.48940000124275684,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.492600000143284
+    },
+    {
+      "round": 3,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.161599997227313,
+      "seconds": 1.48,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.701400000252761
+    },
+    {
+      "round": 4,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.1640999980736524,
+      "seconds": 1.47,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.2750999992713332
+    },
+    {
+      "round": 5,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.18970000019180588,
+      "seconds": 1.39,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.24480000138282776
+    },
+    {
+      "round": 6,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.12910000077681616,
+      "seconds": 1.41,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.2855000020645093
+    },
+    {
+      "round": 7,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.2920000006270129,
+      "seconds": 1.38,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.6376999990607146
+    },
+    {
+      "round": 8,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.5357999980333261,
+      "seconds": 1.43,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.36390000241226517
+    },
+    {
+      "round": 9,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.29100000028847717,
+      "seconds": 1.42,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.32949999877018854
+    },
+    {
+      "round": 10,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.3940999995393213,
+      "seconds": 1.4,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.40129999979399145
+    },
+    {
+      "round": 11,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.23359999977401458,
+      "seconds": 1.41,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.306799996906193
+    },
+    {
+      "round": 12,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.3131000012217555,
+      "seconds": 1.42,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.36729999919771217
+    },
+    {
+      "round": 13,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.13419999959296547,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.24169999960577115
+    },
+    {
+      "round": 14,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.30279999919002876,
+      "seconds": 1.43,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.4413999995449558
+    },
+    {
+      "round": 15,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.3098999986832496,
+      "seconds": 1.39,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.3219999998691492
+    },
+    {
+      "round": 16,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.27910000062547624,
+      "seconds": 1.4,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.3485000015643891
+    },
+    {
+      "round": 17,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.22230000104173087,
+      "seconds": 1.42,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.21240000205580145
+    },
+    {
+      "round": 18,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.09890000001178123,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.4633999997167848
+    },
+    {
+      "round": 19,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.21949999791104347,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.3666000011435244
+    },
+    {
+      "round": 20,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.2677000011317432,
+      "seconds": 1.43,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.34980000054929405
+    },
+    {
+      "round": 21,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.5211999996390659,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.3162000029988121
+    },
+    {
+      "round": 22,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.2525000018067658,
+      "seconds": 1.5,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.43590000132098794
+    },
+    {
+      "round": 23,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.17749999824445695,
+      "seconds": 1.4,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.565500002267072
+    },
+    {
+      "round": 24,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.1809999994293321,
+      "seconds": 1.47,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.33119999716291204
+    },
+    {
+      "round": 25,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.6199999988893978,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.5744999980379362
+    },
+    {
+      "round": 26,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.25610000011511147,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.3327000013086945
+    },
+    {
+      "round": 27,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.23349999901256524,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.345499996910803
+    },
+    {
+      "round": 28,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.8854000006977003,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.40860000081011094
+    },
+    {
+      "round": 29,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.24760000087553635,
+      "seconds": 1.4,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.2041000007011462
+    },
+    {
+      "round": 30,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.23209999926621094,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.32920000012381934
+    },
+    {
+      "round": 31,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.2666000000317581,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.45390000013867393
+    },
+    {
+      "round": 32,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.27319999935571104,
+      "seconds": 1.42,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.33350000012433156
+    },
+    {
+      "round": 33,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.22639999951934442,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.32669999927747995
+    },
+    {
+      "round": 34,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.7662999996682629,
+      "seconds": 1.47,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.49539999963599257
+    },
+    {
+      "round": 35,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.27549999867915176,
+      "seconds": 1.47,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.31600000147591345
+    },
+    {
+      "round": 36,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.24589999884483404,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.34139999843318947
+    },
+    {
+      "round": 37,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.383700000384124,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.5410000012489036
+    },
+    {
+      "round": 38,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.2466000005370006,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.22119999994174577
+    },
+    {
+      "round": 39,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.16110000069602393,
+      "seconds": 1.48,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.28750000274158083
+    },
+    {
+      "round": 40,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.32780000037746504,
+      "seconds": 1.43,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.40019999869400635
+    }
+  ]
+}

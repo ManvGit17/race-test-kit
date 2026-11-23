@@ -1,0 +1,758 @@
+{
+  "probe": "pytest-race",
+  "command": [
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "probe_pytest_race.py"
+  ],
+  "strategy": "naive",
+  "clients": 2,
+  "seats": 1,
+  "rounds": 40,
+  "versions": {
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "pytest-race": "0.2.0",
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "rows": [
+    {
+      "round": 1,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.1903000011225231,
+      "seconds": 1.59,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 14.960200001951307,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x0000025B47F5BF00>(201)",
+        "E        +    where <built-in method count of list object at 0x0000025B47F5BF00> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 2,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.23409999994328246,
+      "seconds": 1.52,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 47.93169999902602,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x0000013C3BE43F80>(201)",
+        "E        +    where <built-in method count of list object at 0x0000013C3BE43F80> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 3,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 13.915200001065386,
+      "seconds": 1.45,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 15.550800002529286
+    },
+    {
+      "round": 4,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.23499999952036887,
+      "seconds": 1.53,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.4881000022578519,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000001B785FC3E00>(201)",
+        "E        +    where <built-in method count of list object at 0x000001B785FC3E00> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 5,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 15.909500001725974,
+      "seconds": 1.55,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.3761000007216353
+    },
+    {
+      "round": 6,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.31820000003790483,
+      "seconds": 1.56,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 15.381600002001505,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x0000018482913F40>(201)",
+        "E        +    where <built-in method count of list object at 0x0000018482913F40> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 7,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 14.298500002041692,
+      "seconds": 1.55,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.6580000008398201
+    },
+    {
+      "round": 8,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.11359999916749075,
+      "seconds": 1.71,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5936999987170566,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000001B583E9BF00>(201)",
+        "E        +    where <built-in method count of list object at 0x000001B583E9BF00> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 9,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 62.391999999817926,
+      "seconds": 1.59,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.4528999998001382
+    },
+    {
+      "round": 10,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 11.902099999133497,
+      "seconds": 1.58,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.30639999749837443,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000001A645783F00>(201)",
+        "E        +    where <built-in method count of list object at 0x000001A645783F00> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 11,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.1081000009435229,
+      "seconds": 1.73,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.8228999977291096,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000002098A263F80>(201)",
+        "E        +    where <built-in method count of list object at 0x000002098A263F80> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 12,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 46.581399998103734,
+      "seconds": 1.6,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 16.00949999919976
+    },
+    {
+      "round": 13,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 16.153500000655185,
+      "seconds": 1.66,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 16.184700001758756,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x0000020EDC7D3B40>(201)",
+        "E        +    where <built-in method count of list object at 0x0000020EDC7D3B40> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 14,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 91.29459999894607,
+      "seconds": 1.65,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.54430000091088
+    },
+    {
+      "round": 15,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 45.05589999826043,
+      "seconds": 1.53,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 15.217799998936243
+    },
+    {
+      "round": 16,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.17110000044340268,
+      "seconds": 1.63,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5765000023529865,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x0000020C68853E80>(201)",
+        "E        +    where <built-in method count of list object at 0x0000020C68853E80> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 17,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.2238000015495345,
+      "seconds": 1.67,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 15.982000000803964,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000001A8B5A9BF00>(201)",
+        "E        +    where <built-in method count of list object at 0x000001A8B5A9BF00> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 18,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 15.161200000875397,
+      "seconds": 1.58,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.2889000024879351,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x0000012D26743F80>(201)",
+        "E        +    where <built-in method count of list object at 0x0000012D26743F80> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 19,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 76.73759999670438,
+      "seconds": 1.62,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 15.551099997537676
+    },
+    {
+      "round": 20,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.1019000010273885,
+      "seconds": 1.58,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 15.406599999550963,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x0000027B190F3D80>(201)",
+        "E        +    where <built-in method count of list object at 0x0000027B190F3D80> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 21,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 15.474600000743521,
+      "seconds": 1.56,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.45540000064647757
+    },
+    {
+      "round": 22,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 76.34820000021136,
+      "seconds": 1.57,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.5463999987114221
+    },
+    {
+      "round": 23,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 45.06680000122287,
+      "seconds": 1.56,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.31010000020614825
+    },
+    {
+      "round": 24,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.21280000146362,
+      "seconds": 1.7,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 16.04869999937364,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000001F7DF9B3B40>(201)",
+        "E        +    where <built-in method count of list object at 0x000001F7DF9B3B40> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 25,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 13.715000000956934,
+      "seconds": 1.61,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.33229999826289713
+    },
+    {
+      "round": 26,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.261799999861978,
+      "seconds": 1.68,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 1.4788000007683877,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000001B767193EC0>(201)",
+        "E        +    where <built-in method count of list object at 0x000001B767193EC0> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 27,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 30.4056999993918,
+      "seconds": 1.6,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.5486999980348628
+    },
+    {
+      "round": 28,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 0.28759999986505136,
+      "seconds": 1.62,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5244999993010424,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x0000019FCADE3E00>(201)",
+        "E        +    where <built-in method count of list object at 0x0000019FCADE3E00> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 29,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 46.68909999963944,
+      "seconds": 1.53,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.3311000000394415
+    },
+    {
+      "round": 30,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 60.79859999954351,
+      "seconds": 1.69,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 31.33489999891026
+    },
+    {
+      "round": 31,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 45.79039999953238,
+      "seconds": 1.66,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 15.381899997009896
+    },
+    {
+      "round": 32,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 45.66999999951804,
+      "seconds": 1.53,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 14.926100000593578
+    },
+    {
+      "round": 33,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 15.291300001990749,
+      "seconds": 1.6,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.27550000231713057,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000002CCE374BF00>(201)",
+        "E        +    where <built-in method count of list object at 0x000002CCE374BF00> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 34,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 12.811399999918649,
+      "seconds": 1.56,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 16.027900001063244,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000001B336B13B40>(201)",
+        "E        +    where <built-in method count of list object at 0x000001B336B13B40> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 35,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 46.41859999901499,
+      "seconds": 1.58,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.3113000020675827
+    },
+    {
+      "round": 36,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 31.036000000312924,
+      "seconds": 1.46,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.26590000197757035
+    },
+    {
+      "round": 37,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 63.47040000036941,
+      "seconds": 1.51,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 0.2770000028249342
+    },
+    {
+      "round": 38,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 30.11070000138716,
+      "seconds": 1.44,
+      "sent": 2,
+      "statuses": {
+        "201": 1,
+        "409": 1
+      },
+      "client_spread_ms": 30.90650000012829
+    },
+    {
+      "round": 39,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 15.197299999272218,
+      "seconds": 1.53,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.5143999987922143,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x00000227EE3E3F40>(201)",
+        "E        +    where <built-in method count of list object at 0x00000227EE3E3F40> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    },
+    {
+      "round": 40,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": true,
+      "taken": 2,
+      "requests_seen_by_server": 2,
+      "server_spread_ms": 15.569600000162609,
+      "seconds": 1.5,
+      "sent": 2,
+      "statuses": {
+        "201": 2
+      },
+      "client_spread_ms": 0.2746999998635147,
+      "failure": [
+        "E       assert 2 <= 1",
+        "E        +  where 2 = <built-in method count of list object at 0x000001E2819C3F00>(201)",
+        "E        +    where <built-in method count of list object at 0x000001E2819C3F00> = [201, 201].count"
+      ],
+      "red_reason": "invariant"
+    }
+  ]
+}

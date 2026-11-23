@@ -1,0 +1,103 @@
+{
+  "probe": "hypothesis-stateful",
+  "command": [
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "probe_hypothesis.py"
+  ],
+  "strategy": "naive",
+  "clients": 50,
+  "seats": 10,
+  "rounds": 5,
+  "versions": {
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "hypothesis": "6.170.17",
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "rows": [
+    {
+      "round": 1,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 49,
+      "server_spread_ms": 350.6975999989663,
+      "seconds": 6.55,
+      "sent": 441,
+      "statuses": {
+        "201": 90,
+        "409": 351
+      },
+      "client_spread_ms": 0.0
+    },
+    {
+      "round": 2,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 49,
+      "server_spread_ms": 343.6641000007512,
+      "seconds": 6.69,
+      "sent": 441,
+      "statuses": {
+        "201": 90,
+        "409": 351
+      },
+      "client_spread_ms": 0.0
+    },
+    {
+      "round": 3,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 49,
+      "server_spread_ms": 519.4859000002907,
+      "seconds": 6.59,
+      "sent": 441,
+      "statuses": {
+        "201": 90,
+        "409": 351
+      },
+      "client_spread_ms": 0.0
+    },
+    {
+      "round": 4,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 49,
+      "server_spread_ms": 404.32030000010855,
+      "seconds": 6.58,
+      "sent": 441,
+      "statuses": {
+        "201": 90,
+        "409": 351
+      },
+      "client_spread_ms": 0.0
+    },
+    {
+      "round": 5,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 49,
+      "server_spread_ms": 364.6346000023186,
+      "seconds": 6.89,
+      "sent": 441,
+      "statuses": {
+        "201": 90,
+        "409": 351
+      },
+      "client_spread_ms": 0.0
+    }
+  ]
+}

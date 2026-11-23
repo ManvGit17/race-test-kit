@@ -1,0 +1,77 @@
+{
+  "probe": "pytest-asyncio-concurrent-parametrize",
+  "command": [
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "probe_asyncio_concurrent_parametrize.py"
+  ],
+  "strategy": "naive",
+  "clients": 2,
+  "seats": 1,
+  "rounds": 3,
+  "versions": {
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "pytest-asyncio-concurrent": "0.5.2",
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "rows": [
+    {
+      "round": 1,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": false,
+      "taken": 0,
+      "requests_seen_by_server": 0,
+      "server_spread_ms": null,
+      "seconds": 1.39,
+      "sent": 0,
+      "statuses": {},
+      "client_spread_ms": null,
+      "failure": [
+        "E       The fixture value for \"i\" is not available during teardown because it was not previously requested.",
+        "E       The fixture value for \"i\" is not available during teardown because it was not previously requested."
+      ],
+      "red_reason": "tool_error"
+    },
+    {
+      "round": 2,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": false,
+      "taken": 0,
+      "requests_seen_by_server": 0,
+      "server_spread_ms": null,
+      "seconds": 1.41,
+      "sent": 0,
+      "statuses": {},
+      "client_spread_ms": null,
+      "failure": [
+        "E       The fixture value for \"i\" is not available during teardown because it was not previously requested.",
+        "E       The fixture value for \"i\" is not available during teardown because it was not previously requested."
+      ],
+      "red_reason": "tool_error"
+    },
+    {
+      "round": 3,
+      "exit_code": 1,
+      "tool_failed": true,
+      "oversold": false,
+      "taken": 0,
+      "requests_seen_by_server": 0,
+      "server_spread_ms": null,
+      "seconds": 1.42,
+      "sent": 0,
+      "statuses": {},
+      "client_spread_ms": null,
+      "failure": [
+        "E       The fixture value for \"i\" is not available during teardown because it was not previously requested.",
+        "E       The fixture value for \"i\" is not available during teardown because it was not previously requested."
+      ],
+      "red_reason": "tool_error"
+    }
+  ]
+}

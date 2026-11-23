@@ -1,0 +1,98 @@
+{
+  "probe": "hypothesis-stateful",
+  "command": [
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "probe_hypothesis.py"
+  ],
+  "strategy": "naive",
+  "clients": 2,
+  "seats": 1,
+  "rounds": 5,
+  "versions": {
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "hypothesis": "6.170.17",
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "rows": [
+    {
+      "round": 1,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 1,
+      "server_spread_ms": null,
+      "seconds": 5.18,
+      "sent": 9,
+      "statuses": {
+        "201": 9
+      },
+      "client_spread_ms": 0.0
+    },
+    {
+      "round": 2,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 1,
+      "server_spread_ms": null,
+      "seconds": 3.01,
+      "sent": 9,
+      "statuses": {
+        "201": 9
+      },
+      "client_spread_ms": 0.0
+    },
+    {
+      "round": 3,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 1,
+      "server_spread_ms": null,
+      "seconds": 3.06,
+      "sent": 9,
+      "statuses": {
+        "201": 9
+      },
+      "client_spread_ms": 0.0
+    },
+    {
+      "round": 4,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 1,
+      "server_spread_ms": null,
+      "seconds": 2.9,
+      "sent": 9,
+      "statuses": {
+        "201": 9
+      },
+      "client_spread_ms": 0.0
+    },
+    {
+      "round": 5,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 1,
+      "requests_seen_by_server": 1,
+      "server_spread_ms": null,
+      "seconds": 2.98,
+      "sent": 9,
+      "statuses": {
+        "201": 9
+      },
+      "client_spread_ms": 0.0
+    }
+  ]
+}

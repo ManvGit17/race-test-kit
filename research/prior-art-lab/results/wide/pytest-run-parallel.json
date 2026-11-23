@@ -1,0 +1,343 @@
+{
+  "probe": "pytest-run-parallel",
+  "command": [
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "probe_run_parallel.py"
+  ],
+  "strategy": "naive",
+  "clients": 50,
+  "seats": 10,
+  "rounds": 20,
+  "versions": {
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "pytest-run-parallel": "0.10.0",
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "rows": [
+    {
+      "round": 1,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 67.67979999858653,
+      "seconds": 2.0,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 18.687100000533974
+    },
+    {
+      "round": 2,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 66.68300000092131,
+      "seconds": 1.94,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 14.229200001864228
+    },
+    {
+      "round": 3,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 63.23870000051102,
+      "seconds": 2.13,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 20.808899997064145
+    },
+    {
+      "round": 4,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 16,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 70.80539999878965,
+      "seconds": 2.23,
+      "sent": 50,
+      "statuses": {
+        "201": 16,
+        "409": 34
+      },
+      "client_spread_ms": 30.99339999971562
+    },
+    {
+      "round": 5,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 56.23669999840786,
+      "seconds": 1.97,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 18.45360000152141
+    },
+    {
+      "round": 6,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 62.3699999996461,
+      "seconds": 2.15,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 47.246399997675326
+    },
+    {
+      "round": 7,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 61.170299999503186,
+      "seconds": 2.23,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 17.64550000007148
+    },
+    {
+      "round": 8,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 25,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 57.34970000048634,
+      "seconds": 1.82,
+      "sent": 50,
+      "statuses": {
+        "201": 25,
+        "409": 25
+      },
+      "client_spread_ms": 21.42660000026808
+    },
+    {
+      "round": 9,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 50.273299999389565,
+      "seconds": 2.0,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 23.364099997706944
+    },
+    {
+      "round": 10,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 59.399100002337946,
+      "seconds": 1.99,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 15.149800001381664
+    },
+    {
+      "round": 11,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 62.544600001274375,
+      "seconds": 2.1,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 20.87490000121761
+    },
+    {
+      "round": 12,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 59.48050000006333,
+      "seconds": 2.0,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 26.037600000563543
+    },
+    {
+      "round": 13,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 25,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 70.80820000192034,
+      "seconds": 2.05,
+      "sent": 50,
+      "statuses": {
+        "201": 25,
+        "409": 25
+      },
+      "client_spread_ms": 37.33579999970971
+    },
+    {
+      "round": 14,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 14,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 77.16780000191648,
+      "seconds": 2.15,
+      "sent": 50,
+      "statuses": {
+        "201": 14,
+        "409": 36
+      },
+      "client_spread_ms": 27.27249999952619
+    },
+    {
+      "round": 15,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 28,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 72.74999999935972,
+      "seconds": 1.93,
+      "sent": 50,
+      "statuses": {
+        "201": 28,
+        "409": 22
+      },
+      "client_spread_ms": 23.95329999853857
+    },
+    {
+      "round": 16,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 11,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 79.93769999666256,
+      "seconds": 2.27,
+      "sent": 50,
+      "statuses": {
+        "201": 11,
+        "409": 39
+      },
+      "client_spread_ms": 34.205500000098255
+    },
+    {
+      "round": 17,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 14,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 69.96689999868977,
+      "seconds": 2.03,
+      "sent": 50,
+      "statuses": {
+        "201": 14,
+        "409": 36
+      },
+      "client_spread_ms": 39.77060000033816
+    },
+    {
+      "round": 18,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 68.13120000151685,
+      "seconds": 2.01,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 26.77670000048238
+    },
+    {
+      "round": 19,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 24,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 48.81220000243047,
+      "seconds": 2.22,
+      "sent": 50,
+      "statuses": {
+        "201": 24,
+        "409": 26
+      },
+      "client_spread_ms": 20.006299997476162
+    },
+    {
+      "round": 20,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": true,
+      "taken": 20,
+      "requests_seen_by_server": 50,
+      "server_spread_ms": 76.29330000054324,
+      "seconds": 2.1,
+      "sent": 50,
+      "statuses": {
+        "201": 20,
+        "409": 30
+      },
+      "client_spread_ms": 26.944599998387275
+    }
+  ]
+}

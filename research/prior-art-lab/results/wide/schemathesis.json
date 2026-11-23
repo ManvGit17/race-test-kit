@@ -1,0 +1,77 @@
+{
+  "probe": "schemathesis",
+  "command": [
+    "schemathesis",
+    "run",
+    "http://127.0.0.1:8765/openapi.json",
+    "-w",
+    "8",
+    "-n",
+    "100",
+    "-c",
+    "never_oversold"
+  ],
+  "strategy": "naive",
+  "clients": 50,
+  "seats": 10,
+  "rounds": 5,
+  "versions": {
+    "pytest": "9.2.0",
+    "httpx": "0.28.1",
+    "schemathesis": "4.33.4",
+    "python": "3.13.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "rows": [
+    {
+      "round": 1,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 82,
+      "server_spread_ms": 23574.976899999456,
+      "seconds": 29.56
+    },
+    {
+      "round": 2,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 87,
+      "server_spread_ms": 24362.61889999878,
+      "seconds": 30.13
+    },
+    {
+      "round": 3,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 91,
+      "server_spread_ms": 24710.6105999992,
+      "seconds": 30.96
+    },
+    {
+      "round": 4,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 87,
+      "server_spread_ms": 19864.894899998035,
+      "seconds": 27.27
+    },
+    {
+      "round": 5,
+      "exit_code": 0,
+      "tool_failed": false,
+      "oversold": false,
+      "taken": 10,
+      "requests_seen_by_server": 82,
+      "server_spread_ms": 19875.966399999015,
+      "seconds": 25.13
+    }
+  ]
+}
