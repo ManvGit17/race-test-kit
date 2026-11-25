@@ -1,6 +1,6 @@
 [project]
 name = "pytest-racekit"
-version = "0.1.0"
+version = "0.1.1"
 description = "Race testing for live services: release many requests from one starting gate, repeat for many rounds, and count the rounds that broke a database invariant."
 readme = "README.md"
 license = "Apache-2.0"
@@ -34,7 +34,7 @@ Documentation = "https://github.com/ManvGit17/race-test-kit/tree/main/docs"
 Changelog = "https://github.com/ManvGit17/race-test-kit/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
-pg = ["psycopg>=3.2,<4"]
+pg = ["psycopg[binary]>=3.2,<4"]
 
 [project.scripts]
 racekit = "racekit.cli:main"

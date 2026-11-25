@@ -37,6 +37,14 @@ def test_marker_beats_the_option(race):
     assert (result.rounds_run, result.seed) == (3, 11)
 
 
+def test_pg_extra_brings_a_working_psycopg():
+    import psycopg
+    import racekit.pg
+
+    assert psycopg.pq.version() > 0  # the client library loaded
+    assert racekit.pg.Snapshot is not None
+
+
 def test_cli_was_installed_into_this_environment():
     # Look next to this interpreter only: PATH may also hold another environment's racekit.
     scripts = Path(sys.executable).parent
@@ -62,7 +70,17 @@ def main() -> int:
         run("uv", "venv", venv, "--python", f"{sys.version_info.major}.{sys.version_info.minor}")
         bindir = venv / ("Scripts" if sys.platform == "win32" else "bin")
         python = bindir / ("python.exe" if sys.platform == "win32" else "python")
-        run("uv", "pip", "install", "--python", python, wheel, PYTEST)
+        # With the pg extra, as the README says to install it: psycopg must import on a
+        # machine with no PostgreSQL client library.
+        run(
+            "uv",
+            "pip",
+            "install",
+            "--python",
+            python,
+            f"pytest-racekit[pg] @ {wheel.as_uri()}",
+            PYTEST,
+        )
 
         project = work / "project"
         project.mkdir()
@@ -79,8 +97,8 @@ def main() -> int:
             "-v",
             cwd=project,
         )
-        if "3 passed" not in out:
-            raise SystemExit("expected 3 passed")
+        if "4 passed" not in out:
+            raise SystemExit("expected 4 passed")
     print("plugin install check: passed")
     return 0
 

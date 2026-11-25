@@ -20,7 +20,8 @@ an update lost.
 pip install "pytest-racekit[pg]"
 ```
 
-The `pg` extra adds psycopg 3 for the PostgreSQL helpers. Installing is enough for pytest to
+The `pg` extra adds psycopg 3 (the binary build, so no PostgreSQL client library is needed)
+for the PostgreSQL helpers. Installing is enough for pytest to
 load the plugin: no conftest changes.
 
 ## Quick start
