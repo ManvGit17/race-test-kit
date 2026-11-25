@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 (2026-11-25)
+
+First release.
 
 - README: install from GitHub, quick start, scenarios, pause points, the CLI, measured
   results with the script behind each number, and how to choose clients and rounds.

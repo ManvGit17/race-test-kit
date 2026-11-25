@@ -1,6 +1,6 @@
 [project]
 name = "pytest-racekit"
-version = "0.0.0"
+version = "0.1.0"
 description = "Race testing for live services: release many requests from one starting gate, repeat for many rounds, and count the rounds that broke a database invariant."
 readme = "README.md"
 license = "Apache-2.0"
@@ -10,7 +10,7 @@ dependencies = []
 authors = [{ name = "ManvGit17" }]
 keywords = ["pytest", "race-condition", "concurrency", "testing", "postgresql", "idempotency", "httpx"]
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
     "Framework :: Pytest",
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
