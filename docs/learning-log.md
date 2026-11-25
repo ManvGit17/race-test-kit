@@ -172,3 +172,86 @@
    check sees them.
 5. Why does `UPDATE ... SET balance = balance + 10` never lose an update at READ COMMITTED,
    while `SELECT balance` followed by `UPDATE ... SET balance = <value read + 10>` does?
+
+## Phase 4: pytest plugin, asyncio backend and CLI (2026-11-23)
+
+**What was built**
+
+- `racekit.Race` (`race.py`): the library's methods plus default rounds and seed, and a memory
+  of every result. Both the fixture and the CLI hand one to a scenario.
+- The pytest plugin (`pytest_plugin.py`), loaded through the `pytest11` entry point: the `race`
+  fixture, `--race-rounds`, `--race-seed`, `@pytest.mark.race`, and a "racekit" section with
+  every report when a test fails.
+- `racekit.arun` (`runner/aio.py`): the asyncio backend. `racekit.rng()` now lives in a
+  `ContextVar`, so threads and tasks each have their own.
+- `racekit run FILE`: runs a file's `race_*(race)` functions outside pytest, with
+  `examples/shop/race_shop.py` as the example.
+- `scripts/plugin_install_check.py`, `bench/phase4_backends.py`, `--backend` in
+  `bench/spread.py`, ADRs 0006 and 0007.
+
+**Why**
+
+- An entry point is what "no conftest changes" means: pip writes it into the package metadata,
+  and pytest loads every `pytest11` entry point it finds at startup.
+- Precedence is argument, marker, option, default: the most specific setting wins, and CI can
+  still raise rounds for every test that did not choose its own.
+- The install check runs in a brand-new virtual environment, because the project's own `.venv`
+  could hide a missing entry point. It even caught a test of its own that passed for the wrong
+  reason: `shutil.which("racekit")` found the project's command on PATH.
+- Installing the plugin makes pytest rewrite `assert` inside `racekit` too, which changed the
+  built-in checks' messages; they now raise `AssertionError` themselves.
+- The asyncio backend can cancel a hung call; threads cannot be killed. But with real `httpx`
+  calls its start was looser than threads (median 27.2 ms against 15.6 ms at 50 clients),
+  because the loop runs each task up to its first `await` before starting the next. Both
+  caught the naive oversell in 96 to 99 of 100 rounds.
+
+**Quiz**
+
+1. What does the `pytest11` entry point in `pyproject.toml` do, and why must the plugin module
+   be cheap to import?
+2. A test has `@pytest.mark.race(rounds=3)`, pytest runs with `--race-rounds 10`, and the test
+   calls `race.run(..., rounds=2)`. How many rounds run, and why that order?
+3. Why does the plugin install check use a fresh virtual environment instead of the project's?
+4. Why did the asyncio backend start 50 HTTP clients less tightly than threads, when it starts
+   50 do-nothing tasks more tightly?
+5. Why must `arun` catch `Exception` and not `BaseException` around each call?
+
+## Phase 5: PostgreSQL helpers and forced interleaving (2026-11-24)
+
+**What was built**
+
+- `racekit.pg.pause_point`, `PausePoints`, `force` (`src/racekit/pg/pause.py`, `force.py`):
+  hold a request at a named line of the app, using a PostgreSQL advisory lock, and run another
+  request while it waits.
+- `racekit.pg.Snapshot` (`snapshot.py`): copy tables once, restore them before each round.
+- A shuffled start order per round in both backends (`rng.start_order`).
+- The shop's cashback, broken and fixed, with a pause point before its write; tests for load
+  alone and forced; `bench/phase5_forcing.py`; ADR 0008.
+
+**Why**
+
+- An advisory lock is a lock on a number, not a row, so the test and the app can meet at an
+  agreed place without touching any data. The app takes and releases it at once; only while
+  the test holds it does the app wait. `pg_locks` shows the waiting session, so the test knows
+  when to send the other request.
+- Making a race that load catches only *sometimes* was the hard part. The first version lost
+  the top-up every round; the second almost never. Measuring which client started first
+  showed the real problem: the barrier released client 0 first nearly every round. A race that
+  depends on order needs the order shuffled, so the runner now does that, by the seed.
+- The load-alone rate is not stable: it moved between about 15% and 75% per batch, and first
+  rounds differ from later ones. That is exactly why a test that relies on load for such a bug
+  is flaky, and why the pause point is worth one line of app code.
+- Results (`bench/results/phase5-forcing.json`): the 2-round load test failed in 36 of 100
+  runs; with the pause point, 100 of 100; the fixed cashback in 0 of 100 either way.
+
+**Quiz**
+
+1. Walk through one forced round: who holds which lock, when does the cashback stop, and why
+   is the top-up always lost?
+2. Why must the `then` step not pass through the same pause point as `first`?
+3. A barrier releases threads "together". Why did client 0 still start first almost every
+   round, and how does the runner fix it without changing which client gets which state?
+4. Why does a pause point cost nothing in production, and what does it cost in a test when
+   nobody holds the lock?
+5. `Snapshot.restore()` truncates every listed table in one statement. What would go wrong
+   with one `TRUNCATE` per table when they reference each other?

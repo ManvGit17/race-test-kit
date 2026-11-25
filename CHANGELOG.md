@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+- `racekit.pg` (needs `pip install pytest-racekit[pg]`): `pause_point(conn, name)` for the app
+  (a no-op unless `RACEKIT_PAUSE_POINTS=1`), `PausePoints(dsn).hold(name)` and
+  `wait_until_paused()` for the test, `force(first, then, at=..., dsn=...)` to run two steps in
+  one exact order every round, and `Snapshot(conn, tables)` to restore tables between rounds.
+- Both backends shuffle the order clients start in, per round and by the seed. Without it the
+  barrier released client 0 first nearly every round.
+- The demo shop gains a cashback (`SHOP_CASHBACK`) whose lost top-up load catches only some of
+  the time, with a pause point that catches it every time.
+- pytest plugin, loaded on install through the `pytest11` entry point: the `race` fixture (a
+  `racekit.Race`), `--race-rounds` and `--race-seed`, and `@pytest.mark.race(rounds=, seed=)`.
+  A failing test that used `race` gets a "racekit" section with every run's report.
+- `racekit run FILE [-k NAME] [--rounds N] [--seed S]`: runs a file's `race_*(race)` functions
+  outside pytest; exit 0 if all pass, 1 if any fail, 2 if the file cannot be loaded.
+- `racekit.arun`: the asyncio backend, for `async def` calls; a hung call is cancelled.
+- `racekit.Race`: the object behind the fixture and the CLI, with `run`, `duplicate`,
+  `lost_update`, `interleave` and `arun` plus defaults and a combined `report()`.
+- Built-in checks raise `AssertionError` explicitly, so pytest's assertion rewriting does not
+  change their messages.
 - Scenarios: `racekit.duplicate` (the same request several times at once),
   `racekit.lost_update` (read-modify-write updates; checks every acknowledged one counted) and
   `racekit.interleave` (different named steps at once, with per-step statuses).
