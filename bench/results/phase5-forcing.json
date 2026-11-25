@@ -1,0 +1,84 @@
+{
+  "when": "2026-11-23T18:43:56+00:00",
+  "command": "uv run python bench/phase5_forcing.py --runs 100 --load-rounds 2",
+  "scenario": "cashback (history of 1000 purchases) against a top-up of 10; 2 rounds per load-alone run, 1 per pause-point run; fresh clients each run",
+  "machine": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.13.5",
+    "logical_cpus": 22
+  },
+  "results": {
+    "read_modify_write/load alone": {
+      "rounds_per_run": 2,
+      "rounds_violated": 44,
+      "runs": 100,
+      "runs_failed": 36,
+      "failed_per_batch_of_10": [
+        2,
+        4,
+        3,
+        3,
+        2,
+        4,
+        5,
+        6,
+        2,
+        5
+      ]
+    },
+    "read_modify_write/pause points": {
+      "rounds_per_run": 1,
+      "rounds_violated": 100,
+      "runs": 100,
+      "runs_failed": 100,
+      "failed_per_batch_of_10": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ]
+    },
+    "atomic/load alone": {
+      "rounds_per_run": 2,
+      "rounds_violated": 0,
+      "runs": 100,
+      "runs_failed": 0,
+      "failed_per_batch_of_10": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "atomic/pause points": {
+      "rounds_per_run": 1,
+      "rounds_violated": 0,
+      "runs": 100,
+      "runs_failed": 0,
+      "failed_per_batch_of_10": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}
