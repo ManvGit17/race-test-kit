@@ -1,0 +1,102 @@
+{
+  "when": "2026-11-23T18:15:45+00:00",
+  "command": "uv run python bench/phase4_backends.py --runs 5",
+  "scenario": "50 students, 10 seats, naive strategy, 20 rounds per run",
+  "machine": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.13.5",
+    "logical_cpus": 22
+  },
+  "totals": {
+    "threads": {
+      "rounds": 100,
+      "rounds_oversold": 96,
+      "spread_ms_median": 15.581,
+      "spread_ms_max": 74.283,
+      "latency_ms_p50": 53.547
+    },
+    "asyncio": {
+      "rounds": 100,
+      "rounds_oversold": 99,
+      "spread_ms_median": 27.2,
+      "spread_ms_max": 125.088,
+      "latency_ms_p50": 71.555
+    }
+  },
+  "per_run": {
+    "threads": [
+      {
+        "rounds": 20,
+        "rounds_oversold": 20,
+        "spread_ms_median": 15.262,
+        "spread_ms_max": 19.894,
+        "latency_ms_p50": 51.279
+      },
+      {
+        "rounds": 20,
+        "rounds_oversold": 20,
+        "spread_ms_median": 15.459,
+        "spread_ms_max": 19.5,
+        "latency_ms_p50": 54.098
+      },
+      {
+        "rounds": 20,
+        "rounds_oversold": 18,
+        "spread_ms_median": 18.709,
+        "spread_ms_max": 26.259,
+        "latency_ms_p50": 61.277
+      },
+      {
+        "rounds": 20,
+        "rounds_oversold": 18,
+        "spread_ms_median": 15.581,
+        "spread_ms_max": 74.283,
+        "latency_ms_p50": 51.762
+      },
+      {
+        "rounds": 20,
+        "rounds_oversold": 20,
+        "spread_ms_median": 16.058,
+        "spread_ms_max": 19.666,
+        "latency_ms_p50": 53.547
+      }
+    ],
+    "asyncio": [
+      {
+        "rounds": 20,
+        "rounds_oversold": 19,
+        "spread_ms_median": 27.958,
+        "spread_ms_max": 38.574,
+        "latency_ms_p50": 77.246
+      },
+      {
+        "rounds": 20,
+        "rounds_oversold": 20,
+        "spread_ms_median": 28.346,
+        "spread_ms_max": 125.088,
+        "latency_ms_p50": 77.333
+      },
+      {
+        "rounds": 20,
+        "rounds_oversold": 20,
+        "spread_ms_median": 26.592,
+        "spread_ms_max": 34.036,
+        "latency_ms_p50": 69.508
+      },
+      {
+        "rounds": 20,
+        "rounds_oversold": 20,
+        "spread_ms_median": 26.581,
+        "spread_ms_max": 30.819,
+        "latency_ms_p50": 70.198
+      },
+      {
+        "rounds": 20,
+        "rounds_oversold": 20,
+        "spread_ms_median": 27.2,
+        "spread_ms_max": 32.539,
+        "latency_ms_p50": 71.555
+      }
+    ]
+  }
+}

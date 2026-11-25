@@ -14,16 +14,17 @@ pytest-together refuses a test whose client-side start spread exceeds 5 ms, and 
 clients it refused all 20 rounds (spread 16 to 33 ms) while the database showed a lost update
 in every one of them.
 
-`bench/spread.py` (results in `bench/results/spread.json`) measures the gate's own release
-cost with calls that do nothing:
+`bench/spread.py` (results in `bench/results/spread.json`, threads rows; re-run on 2026-11-23
+when the asyncio backend was added, see ADR 0007) measures the gate's own release cost with
+calls that do nothing:
 
 | clients | median spread | worst of 30 rounds |
 |---|---|---|
 | 2 | 0.02 ms | 0.13 ms |
-| 10 | 0.14 ms | 0.22 ms |
-| 50 | 0.86 ms | 1.67 ms |
-| 100 | 1.94 ms | 2.20 ms |
-| 300 | 6.36 ms | 6.79 ms |
+| 10 | 0.15 ms | 0.29 ms |
+| 50 | 0.76 ms | 0.97 ms |
+| 100 | 1.59 ms | 2.37 ms |
+| 300 | 4.78 ms | 5.93 ms |
 
 So the barrier itself releases 50 threads within about a millisecond. The 16 to 33 ms in the
 lab came from the calls: the first threads released start running `httpx` code and hold the

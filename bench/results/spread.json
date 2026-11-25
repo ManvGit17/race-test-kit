@@ -1,6 +1,6 @@
 {
-  "when": "2026-11-22T12:12:36+00:00",
-  "command": "uv run python bench/spread.py",
+  "when": "2026-11-23T18:14:20+00:00",
+  "command": "uv run python bench/spread.py --backend both",
   "machine": {
     "platform": "Windows-11-10.0.26300-SP0",
     "python": "3.13.5",
@@ -9,39 +9,84 @@
   },
   "rows": [
     {
+      "backend": "threads",
       "clients": 2,
       "rounds": 30,
       "median_ms": 0.023,
-      "p90_ms": 0.038,
-      "max_ms": 0.134
+      "p90_ms": 0.03,
+      "max_ms": 0.133
     },
     {
+      "backend": "threads",
       "clients": 10,
       "rounds": 30,
-      "median_ms": 0.14,
-      "p90_ms": 0.156,
-      "max_ms": 0.218
+      "median_ms": 0.147,
+      "p90_ms": 0.153,
+      "max_ms": 0.287
     },
     {
+      "backend": "threads",
       "clients": 50,
       "rounds": 30,
-      "median_ms": 0.865,
-      "p90_ms": 1.187,
-      "max_ms": 1.667
+      "median_ms": 0.758,
+      "p90_ms": 0.9,
+      "max_ms": 0.97
     },
     {
+      "backend": "threads",
       "clients": 100,
       "rounds": 30,
-      "median_ms": 1.942,
-      "p90_ms": 2.081,
-      "max_ms": 2.201
+      "median_ms": 1.588,
+      "p90_ms": 1.81,
+      "max_ms": 2.37
     },
     {
+      "backend": "threads",
       "clients": 300,
       "rounds": 30,
-      "median_ms": 6.364,
-      "p90_ms": 6.565,
-      "max_ms": 6.79
+      "median_ms": 4.78,
+      "p90_ms": 5.379,
+      "max_ms": 5.927
+    },
+    {
+      "backend": "asyncio",
+      "clients": 2,
+      "rounds": 30,
+      "median_ms": 0.011,
+      "p90_ms": 0.015,
+      "max_ms": 0.027
+    },
+    {
+      "backend": "asyncio",
+      "clients": 10,
+      "rounds": 30,
+      "median_ms": 0.075,
+      "p90_ms": 0.11,
+      "max_ms": 0.141
+    },
+    {
+      "backend": "asyncio",
+      "clients": 50,
+      "rounds": 30,
+      "median_ms": 0.432,
+      "p90_ms": 0.443,
+      "max_ms": 0.586
+    },
+    {
+      "backend": "asyncio",
+      "clients": 100,
+      "rounds": 30,
+      "median_ms": 0.841,
+      "p90_ms": 0.93,
+      "max_ms": 1.332
+    },
+    {
+      "backend": "asyncio",
+      "clients": 300,
+      "rounds": 30,
+      "median_ms": 2.837,
+      "p90_ms": 3.131,
+      "max_ms": 5.281
     }
   ]
 }
