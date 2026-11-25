@@ -33,6 +33,15 @@ Issues = "https://github.com/ManvGit17/race-test-kit/issues"
 Documentation = "https://github.com/ManvGit17/race-test-kit/tree/main/docs"
 Changelog = "https://github.com/ManvGit17/race-test-kit/blob/main/CHANGELOG.md"
 
+[project.optional-dependencies]
+pg = ["psycopg>=3.2,<4"]
+
+[project.scripts]
+racekit = "racekit.cli:main"
+
+[project.entry-points.pytest11]
+racekit = "racekit.pytest_plugin"
+
 [dependency-groups]
 dev = [
     "fastapi==0.165.0",
@@ -64,7 +73,7 @@ select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF"]
 
 [tool.mypy]
 strict = true
-files = ["src", "tests", "bench", "examples"]
+files = ["src", "tests", "bench", "examples", "scripts"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "examples/shop/tests"]

@@ -701,6 +701,11 @@ name = "pytest-racekit"
 version = "0.0.0"
 source = { editable = "." }
 
+[package.optional-dependencies]
+pg = [
+    { name = "psycopg" },
+]
+
 [package.dev-dependencies]
 dev = [
     { name = "fastapi" },
@@ -714,6 +719,8 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "psycopg", marker = "extra == 'pg'", specifier = ">=3.2,<4" }]
+provides-extras = ["pg"]
 
 [package.metadata.requires-dev]
 dev = [
