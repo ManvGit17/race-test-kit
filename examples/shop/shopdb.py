@@ -117,3 +117,17 @@ def order_states(conn: psycopg.Connection[Any]) -> list[OrderState]:
         " FROM shop_orders o ORDER BY o.id"
     ).fetchall()
     return [OrderState(int(r[0]), str(r[1]), int(r[2])) for r in rows]
+
+
+def seed_history(
+    conn: psycopg.Connection[Any], wallet_id: int, purchases: int, amount: int
+) -> None:
+    """Replace the wallet's history with ``purchases`` purchases of ``amount`` this month."""
+    with conn.transaction():
+        conn.execute("DELETE FROM shop_wallet_history WHERE wallet_id = %s", (wallet_id,))
+        conn.execute(
+            "INSERT INTO shop_wallet_history (wallet_id, amount, at)"
+            " SELECT %s, -%s, now() - (n %% 20) * interval '1 day' FROM generate_series(1, %s) n",
+            (wallet_id, amount, purchases),
+        )
+    conn.execute("ANALYZE shop_wallet_history")

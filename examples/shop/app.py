@@ -12,6 +12,9 @@ purpose and is the default.
   check_then_insert, unique_key
 - ``SHOP_WALLET``, ``POST /wallets/{id}/topup``: read_modify_write, atomic
 - ``SHOP_ORDERS``, ``POST /orders/{id}/pay`` and ``/cancel``: check_then_act, guarded_update
+- ``SHOP_CASHBACK``, ``POST /wallets/{id}/cashback``: read_modify_write, atomic
+
+``RACEKIT_PAUSE_POINTS=1`` turns on the pause point in the cashback (see ``cashback.py``).
 
 The tables are created on startup if they are missing.
 """
@@ -23,6 +26,7 @@ from collections.abc import AsyncIterator, Sequence
 from contextlib import asynccontextmanager
 from typing import Any
 
+import cashback
 import orders
 import payments
 import shopdb
@@ -48,6 +52,7 @@ MODES = {
     "payments": _setting("SHOP_PAYMENTS", payments.MODES),
     "wallet": _setting("SHOP_WALLET", wallet.MODES),
     "orders": _setting("SHOP_ORDERS", orders.MODES),
+    "cashback": _setting("SHOP_CASHBACK", cashback.MODES),
 }
 
 STATUS = {
@@ -136,6 +141,15 @@ def topup(wallet_id: int, body: TopupBody) -> JSONResponse:
     if balance is None:
         return JSONResponse({"error": "no such wallet"}, status_code=404)
     return JSONResponse({"balance": balance})
+
+
+@app.post("/wallets/{wallet_id}/cashback")
+def pay_cashback(wallet_id: int) -> JSONResponse:
+    with pool.connection() as conn:
+        paid = cashback.cashback(conn, MODES["cashback"], wallet_id)
+    if paid is None:
+        return JSONResponse({"error": "no such wallet"}, status_code=404)
+    return JSONResponse({"cashback": paid[0], "balance": paid[1]})
 
 
 # -- orders ---------------------------------------------------------------------------------

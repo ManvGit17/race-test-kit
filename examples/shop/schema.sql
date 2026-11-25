@@ -52,3 +52,13 @@ CREATE TABLE IF NOT EXISTS shop_wallets (
     id      int PRIMARY KEY,
     balance int NOT NULL
 );
+
+-- What a wallet spent and received; cashback is worked out from last month's spending.
+CREATE TABLE IF NOT EXISTS shop_wallet_history (
+    id        bigserial PRIMARY KEY,
+    wallet_id int NOT NULL,
+    amount    int NOT NULL,
+    at        timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS shop_wallet_history_wallet ON shop_wallet_history (wallet_id, at);
