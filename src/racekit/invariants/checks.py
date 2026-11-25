@@ -1,6 +1,9 @@
 """Ready-made checks that look at a round's responses. No database needed.
 
 Each returns a ``check(round)`` for ``racekit.run`` and the scenarios.
+
+They raise ``AssertionError`` explicitly instead of using ``assert``: pytest rewrites asserts in
+installed plugins' packages and would append its own explanation to these messages.
 """
 
 from __future__ import annotations
@@ -16,7 +19,8 @@ def at_most(status: int, n: int) -> Callable[[RoundResult], None]:
 
     def check(round: RoundResult) -> None:
         got = round.statuses[status]
-        assert got <= n, f"{got} responses with status {status}, at most {n} allowed"
+        if got > n:
+            raise AssertionError(f"{got} responses with status {status}, at most {n} allowed")
 
     return check
 
@@ -33,6 +37,7 @@ def same_response(key: Callable[[Any], object]) -> Callable[[RoundResult], None]
         answers = {
             repr(key(c.value)) for c in round.calls if c.ok and (c.status is None or c.status < 400)
         }
-        assert len(answers) <= 1, f"{len(answers)} different answers: {sorted(answers)[:5]}"
+        if len(answers) > 1:
+            raise AssertionError(f"{len(answers)} different answers: {sorted(answers)[:5]}")
 
     return check

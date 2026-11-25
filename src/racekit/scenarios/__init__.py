@@ -90,10 +90,11 @@ def lost_update(
         said_yes = sum(acknowledged(c) for c in this.calls)
         expected = start["value"] + delta * said_yes
         actual = read()
-        assert actual == expected, (
-            f"{said_yes} updates acknowledged: expected {expected:g}, found {actual:g}"
-            f" ({(expected - actual) / delta:g} updates lost)"
-        )
+        if actual != expected:  # not `assert`: see racekit/invariants/checks.py
+            raise AssertionError(
+                f"{said_yes} updates acknowledged: expected {expected:g}, found {actual:g}"
+                f" ({(expected - actual) / delta:g} updates lost)"
+            )
 
     return run(
         apply,
