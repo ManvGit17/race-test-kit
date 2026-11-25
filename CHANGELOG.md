@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- README: install from GitHub, quick start, scenarios, pause points, the CLI, measured
+  results with the script behind each number, and how to choose clients and rounds.
 - `racekit.pg` (needs `pip install pytest-racekit[pg]`): `pause_point(conn, name)` for the app
   (a no-op unless `RACEKIT_PAUSE_POINTS=1`), `PausePoints(dsn).hold(name)` and
   `wait_until_paused()` for the test, `force(first, then, at=..., dsn=...)` to run two steps in

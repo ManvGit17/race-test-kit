@@ -255,3 +255,28 @@
    nobody holds the lock?
 5. `Snapshot.restore()` truncates every listed table in one statement. What would go wrong
    with one `TRUNCATE` per table when they reference each other?
+
+## Phase 6: minimum docs (2026-11-25)
+
+**What was built**
+
+- A README that replaces the "planning" placeholder: install from GitHub, a quick start with the
+  `race` fixture, the scenarios, pause points, `racekit run`, a table of measured results, and
+  advice on choosing clients and rounds. `docs/index.md` now lists every ADR.
+- Not done on purpose (the owner asked for minimum docs only): no docs site, no PyPI release,
+  no terminal recording, no posts.
+
+**Why**
+
+- Every number in the README names the committed script that produced it, and was checked
+  against `bench/results/` before commit.
+- ruff formats Python code blocks inside Markdown too, and CI runs `ruff format --check`, so the
+  README's examples are formatted like the code.
+
+**Quiz**
+
+1. Why does the README install from GitHub, and what does the `[pg]` extra add?
+2. Where does each number in the README come from, and how would you check one?
+3. What is the order of precedence between a call's `rounds=`, the marker, and `--race-rounds`?
+4. Why does the README tell you to keep a test that the broken version is still caught?
+5. What does the README say the tool cannot do, and why is that worth saying up front?
