@@ -51,6 +51,9 @@ class WorkerPool:
         self._done = threading.Barrier(clients + 1)
         self._prepare_errors: dict[int, BaseException] = {}
         self._records: list[CallRecord] = []
+        self._states: list[Any] = [None] * clients
+        # Which client each worker thread runs this round: shuffled per round by the seed.
+        self._order = list(range(clients))
         self._round = 0
         self._threads = [
             threading.Thread(target=self._work, args=(i,), name=f"racekit-{i}", daemon=True)
@@ -81,6 +84,7 @@ class WorkerPool:
     def run_round(self, number: int) -> list[CallRecord]:
         self._round = number
         self._records = [CallRecord(i) for i in range(self._clients)]
+        self._order = rng.start_order(self._seed, number, self._clients)
         try:
             self._gate.wait(self._timeout)
             self._done.wait(self._timeout)
@@ -101,13 +105,12 @@ class WorkerPool:
 
     # -- worker side ---------------------------------------------------------------------
 
-    def _work(self, index: int) -> None:
-        state: Any = None
+    def _work(self, slot: int) -> None:
         if self._prepare is not None:
             try:
-                state = self._prepare(index)
+                self._states[slot] = self._prepare(slot)
             except BaseException as exc:  # reported by start(); must not strand the others
-                self._prepare_errors[index] = exc
+                self._prepare_errors[slot] = exc
         try:
             self._ready.wait()
         except threading.BrokenBarrierError:
@@ -117,6 +120,9 @@ class WorkerPool:
                 released = self._gate.wait()
             except threading.BrokenBarrierError:
                 return
+            # The barrier wakes threads in much the same order every round, so the client a
+            # thread runs is shuffled instead: otherwise client 0 would nearly always go first.
+            index = self._order[slot]
             record = self._records[index]
             record.released = released
             rng.set_current(rng.for_call(self._seed, self._round, index))
@@ -124,7 +130,7 @@ class WorkerPool:
                 if self._prepare is None:
                     record.value = self._call(index)
                 else:
-                    record.value = self._call(index, state)
+                    record.value = self._call(index, self._states[index])
             except BaseException as exc:  # recorded, never raised: the others must not hang
                 record.error = exc
             finally:

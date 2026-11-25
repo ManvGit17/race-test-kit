@@ -41,7 +41,8 @@ to repeat the same inputs", not "to reproduce".
 - **Stop at the first violation.** Cheaper, but loses the rate, which is what tells a user
   whether 20 rounds on their CI are enough.
 - **The runner shuffles start order by seed.** Adds machinery whose effect on scheduling was
-  not measured; deferred until a measurement says it helps.
+  not measured; deferred until a measurement says it helps. *(Superseded 2026-11-24: Phase 5
+  measured that without it client 0 nearly always starts first; see ADR 0008.)*
 - **Count call exceptions as violations.** Mixes "the service errored" with "the invariant
   broke"; they need different fixes.
 

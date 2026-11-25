@@ -240,3 +240,17 @@ def test_summary_names_the_first_violating_round() -> None:
 def test_bad_arguments_are_refused(clients: int, rounds: int) -> None:
     with pytest.raises(ValueError):
         racekit.run(lambda i: None, clients=clients, rounds=rounds)
+
+
+def test_start_order_is_shuffled_per_round_by_the_seed() -> None:
+    """Barriers wake threads in much the same order each round; the runner shuffles which
+    client each thread runs, so every client sometimes starts first."""
+    from racekit.runner.rng import start_order
+
+    assert start_order(5, 1, 4) == start_order(5, 1, 4)
+    assert sorted(start_order(5, 1, 4)) == [0, 1, 2, 3]
+    assert len({tuple(start_order(5, n, 4)) for n in range(1, 30)}) > 5
+
+    result = racekit.run(lambda i: None, clients=2, rounds=40, seed=1)
+    firsts = {min(r.calls, key=lambda c: c.released).index for r in result.rounds}
+    assert firsts == {0, 1}
