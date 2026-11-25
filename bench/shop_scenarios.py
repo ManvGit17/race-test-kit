@@ -1,11 +1,11 @@
 """Run the three scenarios against the broken and the fixed shop, and record the rates.
 
     docker compose up -d --wait
-    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/phase3_scenarios.py
+    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/shop_scenarios.py
 
 The same races as ``examples/shop/tests/test_shop_scenarios.py``: one payment sent 5 times
 (duplicate), 20 top-ups (lost_update), and a pay against a cancel on 5 orders (interleave).
-Writes ``bench/results/phase3-scenarios.json``. Exits 1 if a broken version is never caught or
+Writes ``bench/results/shop-scenarios.json``. Exits 1 if a broken version is never caught or
 a fixed one is ever accused.
 """
 
@@ -88,7 +88,7 @@ def main() -> int:
 
     out = {
         "when": datetime.now(UTC).isoformat(timespec="seconds"),
-        "command": f"uv run python bench/phase3_scenarios.py --rounds {args.rounds}",
+        "command": f"uv run python bench/shop_scenarios.py --rounds {args.rounds}",
         "machine": {
             "platform": platform.platform(),
             "python": platform.python_version(),
@@ -97,7 +97,7 @@ def main() -> int:
         "results": results,
     }
     (ROOT / "bench" / "results").mkdir(parents=True, exist_ok=True)
-    (ROOT / "bench" / "results" / "phase3-scenarios.json").write_text(
+    (ROOT / "bench" / "results" / "shop-scenarios.json").write_text(
         json.dumps(out, indent=2), encoding="utf-8"
     )
     caught = all(results[f"{n}/broken"]["rounds_violated"] > 0 for n in SCENARIOS)

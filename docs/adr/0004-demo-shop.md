@@ -38,15 +38,15 @@ required to sell out, because "busy" can legitimately leave a seat unsold in a r
 
 ## Measured
 
-`bench/phase2_strategies.py --runs 5 --rounds 20` (`bench/results/phase2-strategies.json`),
+`bench/shop_strategies.py --runs 5 --rounds 20` (`bench/results/shop-strategies.json`),
 Windows 11, PostgreSQL 18.7: `naive` oversold in 90 of 100 rounds, selling up to 27 of 10
 seats. The other three oversold in 0 of 100 and sold out in 100 of 100; `skip_locked` answered
 "busy" 0 times.
 
 ## Alternatives rejected
 
-- **Port festrush whole.** Orders, payments and expiry are other races (Phase 3's duplicate and
-  lost-update scenarios); bundling them makes the demo harder to read.
+- **Port festrush whole.** Orders, payments and expiry are other races (the duplicate and
+  lost-update scenarios, ADR 0005); bundling them makes the demo harder to read.
 - **Check through the app's own `GET` endpoint.** A bug in the app could hide itself.
 - **Run the app in-process with `TestClient`.** No real socket, and it shares the test's GIL,
   which changes the timing the test is about.

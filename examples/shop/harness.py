@@ -162,7 +162,7 @@ def reserve_race(
     return race
 
 
-# -- the Phase 3 scenarios ------------------------------------------------------------------
+# -- duplicate payments, lost top-ups, pay against cancel -----------------------------------
 
 
 def _warm_clients(url: str) -> tuple[Callable[[int], httpx.Client], list[httpx.Client]]:
@@ -313,7 +313,7 @@ async def async_reserve_race(
         db.close()
 
 
-# -- Phase 5: cashback against a top-up, by load and forced ---------------------------------
+# -- cashback against a top-up, by load and forced -----------------------------------------
 
 WALLET = 1
 START_BALANCE = 1000

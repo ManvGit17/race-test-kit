@@ -12,7 +12,7 @@ again and again, each needing a little glue around `run`:
 - **Interleaving steps**: two *different* operations on one thing, such as pay against cancel.
 
 Some invariants live in the responses rather than the database: "every copy of a payment got
-the same charge id", "pay and cancel did not both say yes". The Phase 1 `check()` took no
+the same charge id", "pay and cancel did not both say yes". The original `check()` took no
 arguments, so it could not see them.
 
 ## Decision
@@ -55,7 +55,7 @@ variable per feature (`SHOP_PAYMENTS`, `SHOP_WALLET`, `SHOP_ORDERS`):
 The fixes all move the decision into one statement PostgreSQL serialises; at READ COMMITTED,
 an `UPDATE` that waited on a row re-checks its `WHERE` against the committed row.
 
-Measured with `bench/phase3_scenarios.py --rounds 100` (`bench/results/phase3-scenarios.json`):
+Measured with `bench/shop_scenarios.py --rounds 100` (`bench/results/shop-scenarios.json`):
 every broken version violated in 100 of 100 rounds; every fixed version in 0 of 100.
 
 ## Alternatives rejected
@@ -72,6 +72,6 @@ every broken version violated in 100 of 100 rounds; every fixed version in 0 of 
 
 - Like the oversell and the counter, these broken versions have no artificial delay and are
   caught in every round: they show the scenarios work, not how rare a race they can find. That
-  is Phase 5's job (pause points).
+  is the job of pause points (ADR 0008).
 - A `check` with a required positional parameter always gets the round; a check that wants
   something else must take it with a default or a closure.

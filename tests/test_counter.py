@@ -1,7 +1,7 @@
 """The runner against a live HTTP service: a PostgreSQL counter with and without a lost update.
 
-``test_naive_counter_loses_updates`` is the Phase 1 reference test: the naive counter must stay
-broken, and this test proves the runner still catches it. ``bench/phase1_detection.py`` runs it
+``test_naive_counter_loses_updates`` is the reference test: the naive counter must stay
+broken, and this test proves the runner still catches it. ``bench/counter_detection.py`` runs it
 100 times to measure how often.
 """
 
@@ -88,7 +88,7 @@ def increment_race(url: str) -> racekit.RunResult:
 
 
 def _write_bench_record(result: racekit.RunResult) -> None:
-    """For bench/phase1_detection.py: the per-round outcome of this test run."""
+    """For bench/counter_detection.py: the per-round outcome of this test run."""
     out = os.environ.get("RACEKIT_BENCH_OUT")
     if out:
         record = {

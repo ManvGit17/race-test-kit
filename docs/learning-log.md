@@ -1,6 +1,6 @@
 # Learning log
 
-## Phase 0: prior art and scaffold (2026-11-22)
+## Prior art and scaffold (2026-11-22)
 
 **What was built**
 
@@ -29,7 +29,7 @@
 - The control (`row_lock`) proves the check raises no false alarms: an invariant check that
   goes red on correct code would be worse than none.
 - The naive bug turned out easy to hit: even a plain thread pool caught it almost every time.
-  So the lab cannot yet show what a tighter start buys; Phase 1 needs a narrower bug for that.
+  So the lab cannot yet show what a tighter start buys; the runner needs a narrower bug for that.
 - `httpx.Client()` builds an SSL context each time (about 140 ms on Windows). Sharing one
   context made rounds 5 times faster. The same cost would distort a real race test if paid
   after the barrier.
@@ -48,7 +48,7 @@
 4. Why did Schemathesis with `--workers 8` send only one request at a time to this API?
 5. What does the `row_lock` control run prove, and what would it mean if it had gone red?
 
-## Phase 1: runner core (2026-11-22)
+## Runner core (2026-11-22)
 
 **What was built**
 
@@ -62,7 +62,7 @@
 - `tests/apps/counter.py`: a standard-library HTTP server on PostgreSQL. `naive` mode reads
   the counter then writes back the value plus one (a lost update); `atomic` mode runs
   `value = value + 1`.
-- `bench/phase1_detection.py` runs the naive test and the atomic control 100 times each in
+- `bench/counter_detection.py` runs the naive test and the atomic control 100 times each in
   fresh pytest processes; `bench/spread.py` measures the gate on its own. ADRs 0002 and 0003.
 
 **Why**
@@ -96,7 +96,7 @@
 5. The gate releases 50 do-nothing threads within about 1 ms, yet the lab measured 16 to
    33 ms with HTTP calls. Where does the difference come from?
 
-## Phase 2: demo shop and the four strategies (2026-11-23)
+## Demo shop and the four strategies (2026-11-23)
 
 **What was built**
 
@@ -107,7 +107,7 @@
   the app with uvicorn in a subprocess and races 50 students at 10 seats with `racekit.run`.
 - Tests: `naive` must oversell; `row_lock`, `atomic_update` and `skip_locked` must not, and must
   not answer 5xx; the first two must sell every seat. Plus one-request-at-a-time behaviour.
-- `bench/phase2_strategies.py` and ADR 0004. Local databases moved to ports 15416-15418.
+- `bench/shop_strategies.py` and ADR 0004. Local databases moved to ports 15416-15418.
 
 **Why**
 
@@ -118,7 +118,7 @@
 - The checks read the database, not the app: the thing under test cannot be its own judge.
 - `skip_locked` can answer "busy" when free seats are only locked by claims still in flight,
   so it is not required to sell out; it did sell out in all 100 measured rounds here.
-- Results (`bench/results/phase2-strategies.json`): `naive` oversold in 90 of 100 rounds, up to
+- Results (`bench/results/shop-strategies.json`): `naive` oversold in 90 of 100 rounds, up to
   27 reservations for 10 seats; the three safe strategies oversold in 0 of 100.
 - Ports: Windows reserves blocks of ports in its dynamic range (49152 and up) for Hyper-V and
   WSL at boot. 54318 fell inside one after a restart, so the databases moved below that range.
@@ -134,7 +134,7 @@
 5. The UNIQUE constraint stops a student holding two seats even under `naive`. What race does
    `naive` still have, and why doesn't the constraint stop it?
 
-## Phase 3: scenarios and the failure report (2026-11-23)
+## Scenarios and the failure report (2026-11-23)
 
 **What was built**
 
@@ -157,7 +157,7 @@
   `balance = balance + amount`, `UPDATE ... WHERE status = 'pending'`. At READ COMMITTED, an
   `UPDATE` that had to wait for another transaction re-checks its `WHERE` on the newly committed
   row; a plain `SELECT` before it does not.
-- Results (`bench/results/phase3-scenarios.json`): each broken version violated in 100 of 100
+- Results (`bench/results/shop-scenarios.json`): each broken version violated in 100 of 100
   rounds (the duplicate payment made 499 charges for 100 keys); each fixed one in 0 of 100.
 
 **Quiz**
@@ -173,7 +173,7 @@
 5. Why does `UPDATE ... SET balance = balance + 10` never lose an update at READ COMMITTED,
    while `SELECT balance` followed by `UPDATE ... SET balance = <value read + 10>` does?
 
-## Phase 4: pytest plugin, asyncio backend and CLI (2026-11-23)
+## pytest plugin, asyncio backend and CLI (2026-11-23)
 
 **What was built**
 
@@ -186,7 +186,7 @@
   `ContextVar`, so threads and tasks each have their own.
 - `racekit run FILE`: runs a file's `race_*(race)` functions outside pytest, with
   `examples/shop/race_shop.py` as the example.
-- `scripts/plugin_install_check.py`, `bench/phase4_backends.py`, `--backend` in
+- `scripts/plugin_install_check.py`, `bench/backends.py`, `--backend` in
   `bench/spread.py`, ADRs 0006 and 0007.
 
 **Why**
@@ -216,7 +216,7 @@
    50 do-nothing tasks more tightly?
 5. Why must `arun` catch `Exception` and not `BaseException` around each call?
 
-## Phase 5: PostgreSQL helpers and forced interleaving (2026-11-24)
+## PostgreSQL helpers and forced interleaving (2026-11-24)
 
 **What was built**
 
@@ -226,7 +226,7 @@
 - `racekit.pg.Snapshot` (`snapshot.py`): copy tables once, restore them before each round.
 - A shuffled start order per round in both backends (`rng.start_order`).
 - The shop's cashback, broken and fixed, with a pause point before its write; tests for load
-  alone and forced; `bench/phase5_forcing.py`; ADR 0008.
+  alone and forced; `bench/pause_points.py`; ADR 0008.
 
 **Why**
 
@@ -241,7 +241,7 @@
 - The load-alone rate is not stable: it moved between about 15% and 75% per batch, and first
   rounds differ from later ones. That is exactly why a test that relies on load for such a bug
   is flaky, and why the pause point is worth one line of app code.
-- Results (`bench/results/phase5-forcing.json`): the 2-round load test failed in 36 of 100
+- Results (`bench/results/pause-points.json`): the 2-round load test failed in 36 of 100
   runs; with the pause point, 100 of 100; the fixed cashback in 0 of 100 either way.
 
 **Quiz**
@@ -256,7 +256,7 @@
 5. `Snapshot.restore()` truncates every listed table in one statement. What would go wrong
    with one `TRUNCATE` per table when they reference each other?
 
-## Phase 6: minimum docs (2026-11-25)
+## Minimum docs (2026-11-25)
 
 **What was built**
 

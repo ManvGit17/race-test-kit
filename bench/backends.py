@@ -2,11 +2,11 @@
 often is the naive oversell caught?
 
     docker compose up -d --wait
-    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/phase4_backends.py
+    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/backends.py
 
 The same race for both backends: 50 students, 10 seats, warmed clients (``httpx.Client`` per
 thread, ``httpx.AsyncClient`` per task), against the ``naive`` shop. Writes
-``bench/results/phase4-backends.json``.
+``bench/results/backends.json``.
 """
 
 from __future__ import annotations
@@ -74,7 +74,7 @@ def main() -> int:
 
     out = {
         "when": datetime.now(UTC).isoformat(timespec="seconds"),
-        "command": f"uv run python bench/phase4_backends.py --runs {args.runs}",
+        "command": f"uv run python bench/backends.py --runs {args.runs}",
         "scenario": "50 students, 10 seats, naive strategy, 20 rounds per run",
         "machine": {
             "platform": platform.platform(),
@@ -85,7 +85,7 @@ def main() -> int:
         "per_run": results,
     }
     (ROOT / "bench" / "results").mkdir(parents=True, exist_ok=True)
-    (ROOT / "bench" / "results" / "phase4-backends.json").write_text(
+    (ROOT / "bench" / "results" / "backends.json").write_text(
         json.dumps(out, indent=2), encoding="utf-8"
     )
     return 0

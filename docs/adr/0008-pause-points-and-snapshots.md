@@ -7,14 +7,14 @@ Date: 2026-11-24.
 Every broken example so far (oversell, lost counter, duplicate payment, lost top-up, pay and
 cancel) is caught in nearly every round: load alone is enough. Real bugs are often narrower,
 needing one particular order of events, and a test that catches one in a third of its runs is
-flaky: it gets retried until green. PLAN.md's Phase 5 check: a lost-update test that fails
+flaky: it gets retried until green. The goal: a lost-update test that fails
 about half the time by load alone must fail every time with pause points.
 
 ## The bug: cashback against a top-up
 
 `examples/shop/cashback.py` (`SHOP_CASHBACK`). The cashback checks eligibility, reads the
 balance, adds up last month's spending, then writes back *the balance it read* plus 1%. A
-top-up (the atomic one from Phase 3) that commits between that read and the write is lost.
+top-up (the atomic one from ADR 0005) that commits between that read and the write is lost.
 
 Getting a race that load catches only sometimes took three attempts, each measured:
 
@@ -59,7 +59,7 @@ connection.
 
 ## Measured
 
-`bench/phase5_forcing.py --runs 100 --load-rounds 2` (`bench/results/phase5-forcing.json`),
+`bench/pause_points.py --runs 100 --load-rounds 2` (`bench/results/pause-points.json`),
 broken cashback with a history of 1000 purchases, fresh clients every run:
 
 | | load alone (2 rounds per run) | pause points (1 round per run) |
@@ -72,7 +72,7 @@ broken cashback with a history of 1000 purchases, fresh clients every run:
 ## Alternatives rejected
 
 - **A `sleep` in the broken code** to widen the window. It makes the race easy, which is the
-  opposite of what this phase demonstrates, and real bugs have no sleep in them.
+  opposite of what pause points demonstrate, and real bugs have no sleep in them.
 - **One 64-bit advisory key** (`hashtextextended`). Could collide with the app's own keys; the
   two-key form with a namespace cannot, and its `pg_locks` columns are easier to match.
 - **Pause points switched on by an argument** passed through the app. An environment variable
@@ -84,5 +84,6 @@ broken cashback with a history of 1000 purchases, fresh clients every run:
 - The seed now also fixes each round's start order, so a rerun with the same seed repeats the
   order the clients were released in (ADR 0003's deferred item, done because a measurement
   showed it matters).
-- Numbers in the Phase 1-4 bench files were measured before the shuffle; they stand for the
+- Numbers in the earlier bench files (counter detection, shop strategies, shop scenarios,
+  backends) were measured before the shuffle; they stand for the
   code they were measured with.

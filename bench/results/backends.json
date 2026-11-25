@@ -1,6 +1,6 @@
 {
   "when": "2026-11-23T18:15:45+00:00",
-  "command": "uv run python bench/phase4_backends.py --runs 5",
+  "command": "uv run python bench/backends.py --runs 5",
   "scenario": "50 students, 10 seats, naive strategy, 20 rounds per run",
   "machine": {
     "platform": "Windows-11-10.0.26300-SP0",

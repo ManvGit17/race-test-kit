@@ -1,6 +1,6 @@
 {
   "when": "2026-11-22T12:12:47+00:00",
-  "command": "uv run python bench/phase1_detection.py --runs 100",
+  "command": "uv run python bench/counter_detection.py --runs 100",
   "machine": {
     "platform": "Windows-11-10.0.26300-SP0",
     "python": "3.13.5",

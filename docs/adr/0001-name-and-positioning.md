@@ -46,6 +46,6 @@ the original pitch:
 ## Consequences
 
 - The README and `docs/prior-art.md` name `pytest-together` up front.
-- Phase 5 (forced interleaving) moves from stretch to a main point of difference.
+- Forced interleaving (pause points) moves from stretch goal to a main point of difference.
 - If `pytest-together` adds rounds later, the remaining differences are the database helpers,
   scenarios and pause points.

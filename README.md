@@ -5,7 +5,7 @@ pytest-racekit releases many requests from one starting gate, repeats that for m
 and reports in how many rounds an invariant broke: a seat sold twice, a payment charged twice,
 an update lost.
 
-> **Status: alpha.** Not on PyPI yet. Install from GitHub (below).
+> **Status: alpha.** The API may still change before 1.0.
 
 ## What it is and is not
 
@@ -17,7 +17,7 @@ an update lost.
 ## Install
 
 ```bash
-pip install "pytest-racekit[pg] @ git+https://github.com/ManvGit17/race-test-kit"
+pip install "pytest-racekit[pg]"
 ```
 
 The `pg` extra adds psycopg 3 for the PostgreSQL helpers. Installing is enough for pytest to
@@ -107,12 +107,12 @@ machine and versions are in `bench/results/`.
 
 | what | broken | fixed | script |
 |---|---|---|---|
-| 50 students, 10 seats (`naive` vs `row_lock`, `atomic_update`, `skip_locked`) | oversold in 90 of 100 rounds | 0 of 100 each | `bench/phase2_strategies.py` |
-| one payment sent 5 times | caught in 100 of 100 rounds | 0 of 100 | `bench/phase3_scenarios.py` |
-| 20 top-ups at once | caught in 100 of 100 rounds | 0 of 100 | `bench/phase3_scenarios.py` |
-| pay against cancel on 5 orders | caught in 100 of 100 rounds | 0 of 100 | `bench/phase3_scenarios.py` |
-| cashback against a top-up, load alone | the 2-round test failed in 36 of 100 runs | 0 of 100 | `bench/phase5_forcing.py` |
-| the same, with the pause point | failed in 100 of 100 runs | 0 of 100 | `bench/phase5_forcing.py` |
+| 50 students, 10 seats (`naive` vs `row_lock`, `atomic_update`, `skip_locked`) | oversold in 90 of 100 rounds | 0 of 100 each | `bench/shop_strategies.py` |
+| one payment sent 5 times | caught in 100 of 100 rounds | 0 of 100 | `bench/shop_scenarios.py` |
+| 20 top-ups at once | caught in 100 of 100 rounds | 0 of 100 | `bench/shop_scenarios.py` |
+| pay against cancel on 5 orders | caught in 100 of 100 rounds | 0 of 100 | `bench/shop_scenarios.py` |
+| cashback against a top-up, load alone | the 2-round test failed in 36 of 100 runs | 0 of 100 | `bench/pause_points.py` |
+| the same, with the pause point | failed in 100 of 100 runs | 0 of 100 | `bench/pause_points.py` |
 
 ## Choosing clients and rounds
 
@@ -129,8 +129,8 @@ machine and versions are in `bench/results/`.
 
 ## Docs
 
-[Prior art](docs/prior-art.md) · [ADRs](docs/adr/) · [Changelog](CHANGELOG.md) ·
-[Contributing](CONTRIBUTING.md)
+[Prior art](https://github.com/ManvGit17/race-test-kit/blob/main/docs/prior-art.md) · [ADRs](https://github.com/ManvGit17/race-test-kit/tree/main/docs/adr) ·
+[Changelog](https://github.com/ManvGit17/race-test-kit/blob/main/CHANGELOG.md) · [Contributing](https://github.com/ManvGit17/race-test-kit/blob/main/CONTRIBUTING.md)
 
 ## Licence
 

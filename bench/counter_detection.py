@@ -1,7 +1,7 @@
-"""Run the Phase 1 reference tests many times and count how often the lost update is caught.
+"""Run the counter reference tests many times and count how often the lost update is caught.
 
     docker compose up -d --wait
-    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/phase1_detection.py
+    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/counter_detection.py
 
 Each run is a fresh pytest process running one test from ``tests/test_counter.py``:
 
@@ -11,7 +11,7 @@ Each run is a fresh pytest process running one test from ``tests/test_counter.py
 
 Both the share of test runs and the share of rounds are reported, because a race test is a
 sample: "caught in 98 of 100 runs" and "violated in 950 of 1000 rounds" say different things.
-Writes ``bench/results/phase1-detection.json``. Exits 1 if the naive test is caught in fewer
+Writes ``bench/results/counter-detection.json``. Exits 1 if the naive test is caught in fewer
 than 95 runs or the atomic control ever violates.
 """
 
@@ -69,7 +69,7 @@ def main() -> int:
 
     summary: dict[str, Any] = {
         "when": datetime.now(UTC).isoformat(timespec="seconds"),
-        "command": f"uv run python bench/phase1_detection.py --runs {args.runs}",
+        "command": f"uv run python bench/counter_detection.py --runs {args.runs}",
         "machine": {
             "platform": platform.platform(),
             "python": platform.python_version(),
@@ -106,7 +106,7 @@ def main() -> int:
             }
 
     RESULTS.mkdir(parents=True, exist_ok=True)
-    (RESULTS / "phase1-detection.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    (RESULTS / "counter-detection.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     naive, atomic = summary["results"]["naive"], summary["results"]["atomic"]
     print(

@@ -1,16 +1,16 @@
 """Load alone against pause points: how often does the cashback's lost top-up get caught?
 
     docker compose up -d --wait
-    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/phase5_forcing.py
+    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/pause_points.py
 
-PLAN.md's Phase 5 check: a lost-update test that fails about half the time by load alone must
+The check: a lost-update test that fails about half the time by load alone must
 fail every time with pause points. One "run of the test" is a fresh call of the harness race,
 with fresh clients: by load alone, ``--load-rounds`` rounds of the cashback racing a top-up
 (2 by default, which made the test fail in about 40% of runs while calibrating); with pause
 points, a single round.
 Each mode runs ``--runs`` times against the broken cashback and against the fixed one, and the
 load-alone runs are also reported in batches of 10 to show how much the share moves.
-Writes ``bench/results/phase5-forcing.json``.
+Writes ``bench/results/pause-points.json``.
 """
 
 from __future__ import annotations
@@ -71,7 +71,7 @@ def main() -> int:
     out = {
         "when": datetime.now(UTC).isoformat(timespec="seconds"),
         "command": (
-            f"uv run python bench/phase5_forcing.py --runs {args.runs}"
+            f"uv run python bench/pause_points.py --runs {args.runs}"
             f" --load-rounds {args.load_rounds}"
         ),
         "scenario": f"cashback (history of {PURCHASES} purchases) against a top-up of 10;"
@@ -85,7 +85,7 @@ def main() -> int:
         "results": results,
     }
     (ROOT / "bench" / "results").mkdir(parents=True, exist_ok=True)
-    (ROOT / "bench" / "results" / "phase5-forcing.json").write_text(
+    (ROOT / "bench" / "results" / "pause-points.json").write_text(
         json.dumps(out, indent=2), encoding="utf-8"
     )
     broken = results["read_modify_write/pause points"]

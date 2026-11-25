@@ -1,12 +1,12 @@
 """Race the demo shop under each strategy and record how often each one oversells.
 
     docker compose up -d --wait
-    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/phase2_strategies.py
+    TEST_PG_DSN=postgresql://test:test@127.0.0.1:15418/test uv run python bench/shop_strategies.py
 
 The same scenario as ``examples/shop/tests``: 50 students, 10 seats, released together, the
 event reset in the database before each round and checked after. Each strategy runs
 ``--runs`` times ``--rounds`` rounds on its own server. Writes
-``bench/results/phase2-strategies.json``. Exits 1 if ``naive`` never oversells or a safe
+``bench/results/shop-strategies.json``. Exits 1 if ``naive`` never oversells or a safe
 strategy ever does.
 """
 
@@ -85,7 +85,7 @@ def main() -> int:
     out = {
         "when": datetime.now(UTC).isoformat(timespec="seconds"),
         "command": (
-            f"uv run python bench/phase2_strategies.py --runs {args.runs} --rounds"
+            f"uv run python bench/shop_strategies.py --runs {args.runs} --rounds"
             f" {args.rounds} --clients {args.clients} --seats {args.seats}"
         ),
         "machine": {
@@ -96,7 +96,7 @@ def main() -> int:
         "results": results,
     }
     (ROOT / "bench" / "results").mkdir(parents=True, exist_ok=True)
-    (ROOT / "bench" / "results" / "phase2-strategies.json").write_text(
+    (ROOT / "bench" / "results" / "shop-strategies.json").write_text(
         json.dumps(out, indent=2), encoding="utf-8"
     )
     safe_ok = all(results[s]["rounds_oversold"] == 0 for s in STRATEGIES if s != "naive")

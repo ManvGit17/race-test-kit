@@ -76,7 +76,7 @@ Reviewed from docs and source only, not run:
 - **This bug is easy to hit.** With no artificial delay, even a plain `ThreadPoolExecutor`
   oversold in 19 of 20 wide rounds and 40 of 40 pair rounds; a barrier added nothing
   measurable here. A bug with a narrower window will be needed to show what a tighter start
-  buys (Phase 1's counter, Phase 5's pause points).
+  buys (the counter app, and the pause points of ADR 0008).
 - **Lab trap worth keeping:** creating an `httpx.Client` costs about 140 ms on Windows
   because each one builds its own SSL context, even for plain `http://`. Fifty of them made
   every round take 10 seconds until the probes shared one context.

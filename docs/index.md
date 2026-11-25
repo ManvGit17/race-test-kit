@@ -11,4 +11,4 @@
   - [0006 pytest plugin and CLI](adr/0006-pytest-plugin-and-cli.md)
   - [0007 asyncio backend](adr/0007-asyncio-backend.md)
   - [0008 Pause points and snapshots](adr/0008-pause-points-and-snapshots.md)
-- [Learning log](learning-log.md): what each phase built and why, with quiz questions.
+- [Learning log](learning-log.md): what each step built and why, with quiz questions.

@@ -56,6 +56,6 @@ GIL, so the later ones record their start late.
 - The spread measures when workers *started their call*, on the client. It is not when
   requests reached the server; that would need server-side timing, which a black-box tool
   does not have in general.
-- With the GIL, more clients means a wider spread. The asyncio backend (Phase 4) is the answer
+- With the GIL, more clients means a wider spread. The asyncio backend (ADR 0007) is the answer
   for many clients; free-threaded CPython may change these numbers, and the bench records
   whether the GIL was on.

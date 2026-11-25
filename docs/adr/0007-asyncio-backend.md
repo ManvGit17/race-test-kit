@@ -32,7 +32,7 @@ seed, round and client (tested).
 | 50 | 0.76 ms | 0.43 ms |
 | 300 | 4.78 ms | 2.84 ms |
 
-`bench/phase4_backends.py --runs 5` (`bench/results/phase4-backends.json`): 50 students, 10
+`bench/backends.py --runs 5` (`bench/results/backends.json`): 50 students, 10
 seats, the `naive` shop, 100 rounds per backend, alternating runs:
 
 | | threads (`httpx.Client`) | asyncio (`httpx.AsyncClient`) |

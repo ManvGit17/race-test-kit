@@ -4,7 +4,7 @@ Date: 2026-11-23.
 
 ## Context
 
-PLAN.md's "Done when" for Phase 4: installing the package makes a `race` fixture available
+The goal: installing the package makes a `race` fixture available
 with no conftest changes. The plan also asks for `--race-rounds`, `--race-seed`, a
 `@pytest.mark.race` marker, and `racekit run scenario.py` for use outside pytest.
 

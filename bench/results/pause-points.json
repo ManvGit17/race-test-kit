@@ -1,6 +1,6 @@
 {
   "when": "2026-11-23T18:43:56+00:00",
-  "command": "uv run python bench/phase5_forcing.py --runs 100 --load-rounds 2",
+  "command": "uv run python bench/pause_points.py --runs 100 --load-rounds 2",
   "scenario": "cashback (history of 1000 purchases) against a top-up of 10; 2 rounds per load-alone run, 1 per pause-point run; fresh clients each run",
   "machine": {
     "platform": "Windows-11-10.0.26300-SP0",
