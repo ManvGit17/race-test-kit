@@ -10,7 +10,7 @@ from racekit.runner.rounds import run
 from racekit.runner.threads import PrepareError, RoundTimeout
 from racekit.scenarios import duplicate, interleave, lost_update
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "CallRecord",
