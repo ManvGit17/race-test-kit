@@ -52,18 +52,19 @@ def run(
             if reset is not None:
                 reset()
             this = RoundResult(number, pool.run_round(number))
-            this.violated, this.check_message = _check(check, this)
+            this.violated, this.check_message = judge(check, this)
             result.rounds.append(this)
     finally:
         pool.close()
     return result
 
 
-def _check(check: Callable[..., object] | None, this: RoundResult) -> tuple[bool, str | None]:
+def judge(check: Callable[..., object] | None, this: RoundResult) -> tuple[bool, str | None]:
+    """Run ``check`` on a finished round: (violated, why). Shared by every round loop."""
     if check is None:
         return False, None
     try:
-        outcome = check(this) if _wants_round(check) else check()
+        outcome = check(this) if wants_round(check) else check()
     except AssertionError as exc:
         return True, str(exc) or "AssertionError"
     if outcome is False:
@@ -71,7 +72,7 @@ def _check(check: Callable[..., object] | None, this: RoundResult) -> tuple[bool
     return False, None
 
 
-def _wants_round(check: Callable[..., object]) -> bool:
+def wants_round(check: Callable[..., object]) -> bool:
     """Whether ``check`` has a required positional parameter, so it takes the round."""
     try:
         parameters = inspect.signature(check).parameters.values()
