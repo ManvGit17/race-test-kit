@@ -2,6 +2,8 @@
 
 from racekit.invariants.checks import at_most, same_response
 from racekit.invariants.result import RoundResult, RunResult
+from racekit.race import Race
+from racekit.runner.aio import arun
 from racekit.runner.capture import CallRecord
 from racekit.runner.rng import rng
 from racekit.runner.rounds import run
@@ -13,10 +15,12 @@ __version__ = "0.0.0"
 __all__ = [
     "CallRecord",
     "PrepareError",
+    "Race",
     "RoundResult",
     "RoundTimeout",
     "RunResult",
     "__version__",
+    "arun",
     "at_most",
     "duplicate",
     "interleave",

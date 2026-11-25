@@ -7,6 +7,8 @@ from typing import Any
 import psycopg
 import pytest
 
+pytest_plugins = ["pytester"]
+
 
 @pytest.fixture(scope="session")
 def pg_dsn() -> str:
